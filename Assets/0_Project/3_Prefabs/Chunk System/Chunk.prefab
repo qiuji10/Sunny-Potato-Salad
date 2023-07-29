@@ -80,8 +80,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkSize: {x: 8, y: 8}
   spacing: 2
-  groundPrefab: {fileID: 4694435896937560912, guid: 6fb3eeba9c594894e982a3df5f441f21,
+  groundPrefab: {fileID: -7668108228894839693, guid: 70351c0b6f439534088a87f691855fc2,
     type: 3}
+  groundOffset: {x: 0, y: -1.5, z: 0}
   chunkContainer: {fileID: 342563335524821527}
   obstacleContainer: {fileID: 2081157989647815859}
 --- !u!65 &25914938801195257
