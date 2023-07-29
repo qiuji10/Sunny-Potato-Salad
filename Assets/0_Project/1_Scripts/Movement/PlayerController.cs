@@ -51,16 +51,16 @@ public class PlayerController : MonoBehaviour
         switch (_direction)
         {
             case DirectionStates.forward:
-                _nextPosition = new Vector3(-1f, 0f, 0f);
+                _nextPosition = new Vector3(-2f, 0f, 0f);
                 break;
             case DirectionStates.backward:
-                _nextPosition = new Vector3(1f, 0f, 0f);
+                _nextPosition = new Vector3(2f, 0f, 0f);
                 break;
             case DirectionStates.left:
-                _nextPosition = new Vector3(0f, 0f, -1f);
+                _nextPosition = new Vector3(0f, 0f, -2f);
                 break;
             case DirectionStates.right:
-                _nextPosition = new Vector3(0f, 0f, 1f);
+                _nextPosition = new Vector3(0f, 0f, 2f);
                 break;
         }
 
