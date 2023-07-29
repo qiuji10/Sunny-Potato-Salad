@@ -88,8 +88,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Digging(float duration)
     {
+        Ground ground = ChunkManager.GetGround(transform.position);
         yield return new WaitForSeconds(duration);
+        ground.SetGroundState(GroundState.Digged);
 
+        cantMove = false;
     }
 
     private IEnumerator StunDuration(float duration)
@@ -116,10 +119,11 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        //if (other.CompareTag("Treasure"))
-        //{
-
-        //}
+        if (other.CompareTag("TreasureChest"))
+        {
+            cantMove = true;
+            StartCoroutine(Digging(0.5f));
+        }
 
         if (other.CompareTag("Tree"))
         {

@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3642006765958601993}
   - component: {fileID: 6719928146279397713}
-  - component: {fileID: 4042030202520249314}
+  - component: {fileID: 2804651807057231238}
   - component: {fileID: 3043151069425373271}
   - component: {fileID: 58661408381427270}
   m_Layer: 0
@@ -65,7 +65,7 @@ Transform:
   m_Children:
   - {fileID: 3515522844678890798}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -30, y: 90, z: 0}
 --- !u!212 &6719928146279397713
 SpriteRenderer:
@@ -119,8 +119,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &4042030202520249314
-CapsuleCollider:
+--- !u!135 &2804651807057231238
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,11 +137,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.53333336
-  m_Height: 2.1333334
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 3
+  m_Radius: 0.45
+  m_Center: {x: 0, y: 0, z: 0.25}
 --- !u!114 &3043151069425373271
 MonoBehaviour:
   m_ObjectHideFlags: 0
