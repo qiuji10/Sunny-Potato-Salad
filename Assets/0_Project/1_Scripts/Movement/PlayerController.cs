@@ -10,17 +10,10 @@ public enum DirectionStates
     right
 }
 
-public enum GeneralStates
-{
-    move,
-    dig,
-    bounce
-}
 
 public class PlayerController : MonoBehaviour
 {
     private DirectionStates _direction;
-    private GeneralStates _action;
 
     public bool cantMove;
     public float moveSpeed = 5.0f;
@@ -39,26 +32,13 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        ActionStates();
-    }
-
-    private void ActionStates()
-    {
-        switch(_action)
-        {
-            case GeneralStates.move:
-                ChangeDirection();
-                ConstantMovement();
-                break;
-            case GeneralStates.bounce:
-                break;
-        }
+        if (cantMove) return;
+        ChangeDirection();
+        ConstantMovement();
     }
 
     private void ConstantMovement()
     {
-        if (cantMove) return;
-
         transform.position = Vector3.MoveTowards(transform.position, moveCoord.position, moveSpeed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, moveCoord.position) >= 0.0001f) return;
@@ -115,13 +95,22 @@ public class PlayerController : MonoBehaviour
     private IEnumerator StunDuration(float duration)
     {
         yield return new WaitForSeconds(duration);
-        _action = GeneralStates.move;
+        cantMove = false;
+    }
+    
+    private IEnumerator MovementSlowed(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        moveSpeed = 5.0f;
     }
 
-    private void KnockBackDirection()
+    public void KnockBack(float stunTime)
     {
-        //Vector3 shakeMovement = 
-        //transform.position = Vector3.MoveTowards(transform.position, , moveSpeed * Time.deltaTime);
+        cantMove = true;
+        moveSpeed = 5.0f / 2f;
+        moveCoord.position = _prevPosition;
+        StartCoroutine(StunDuration(0.25f));
+        StartCoroutine(MovementSlowed(stunTime));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -129,14 +118,17 @@ public class PlayerController : MonoBehaviour
 
         //if (other.CompareTag("Treasure"))
         //{
-            
+
         //}
 
-        if (other.CompareTag("Obstacle"))
+        if (other.CompareTag("Tree"))
         {
-            _action = GeneralStates.bounce;
-            moveCoord.position = _prevPosition;
-            StartCoroutine(StunDuration(0.25f));
+            KnockBack(0.25f);
+        }
+
+        if (other.CompareTag("Rock"))
+        {
+            KnockBack(1.0f);
         }
     }
 
