@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public enum DirectionStates
@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 _nextPosition;
     private Vector3 _prevPosition;
 
-
     public void Start()
     {
         moveCoord.parent = null;
@@ -33,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         if (cantMove) return;
+        SwipeDetection();
         ChangeDirection();
         ConstantMovement();
     }
@@ -83,6 +83,69 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             _direction = DirectionStates.right;
+        }
+    }
+
+    [SerializeField] float swipeDeadZone;
+    [SerializeField] float swipeDuration;
+    float firstTapTime;
+
+    Vector3 firstTouchPos;
+
+    private void SwipeDetection()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            firstTapTime = Time.time;
+            firstTouchPos = Input.mousePosition;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            Vector2 swipeDelta = Input.mousePosition - firstTouchPos;
+
+            if (swipeDelta != Vector2.zero && Time.time - firstTapTime <= swipeDuration)
+            {
+                SwipeDirection(swipeDelta);
+            }
+
+        }
+    }
+
+    private void SwipeDirection(Vector2 delta)
+    {
+        float xAbs = Mathf.Abs(delta.x);
+        float yAbs = Mathf.Abs(delta.y);
+
+        //Horizontal Swipe
+        if (xAbs > yAbs)
+        {
+            //do left or right
+            if (delta.x > 0)
+            {
+                Debug.Log("Right");
+                _direction = DirectionStates.right;
+            }
+
+            else if (delta.x < 0)
+            {
+                Debug.Log("Left");
+                _direction = DirectionStates.left;
+            }
+        }
+        //Vertical swipe
+        else
+        {
+            //up or down
+            if (delta.y > 0)
+            {
+                _direction = DirectionStates.forward;
+            }
+
+            else if (delta.y < 0)
+            {
+                _direction = DirectionStates.backward;
+            }
         }
     }
 
