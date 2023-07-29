@@ -32,6 +32,11 @@ public class Timer : MonoBehaviour
         _remainingTime += extraTime;
     }
 
+    public void ResumeTimer()
+    {
+        _isRunning = true;
+    }
+
     public void StopTimer()
     {
         _isRunning = false;

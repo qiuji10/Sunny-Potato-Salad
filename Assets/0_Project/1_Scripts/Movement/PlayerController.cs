@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.EventSystems;
 
 public enum DirectionStates
 {
@@ -108,6 +109,11 @@ public class PlayerController : MonoBehaviour
 
     private void SwipeDetection()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             _firstTapTime = Time.time;
