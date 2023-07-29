@@ -104,7 +104,7 @@ public class ChunkManager : MonoBehaviour
                 }
                 else
                 {
-                    chunk.EnableChunk();
+                    chunk.ToggleChunk(true);
                     _enabledChunks.Add(neighborChunkPos, chunk);
                 }
                 
@@ -127,7 +127,7 @@ public class ChunkManager : MonoBehaviour
             if (_enabledChunks[chunkPos] == activeChunk)
                 continue;
 
-            _enabledChunks[chunkPos].DisableChunk();
+            _enabledChunks[chunkPos].ToggleChunk(false);
             _enabledChunks.Remove(chunkPos);
         }
     }

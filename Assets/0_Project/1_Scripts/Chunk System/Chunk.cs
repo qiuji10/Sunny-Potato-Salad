@@ -18,6 +18,7 @@ public class Chunk : MonoBehaviour
     public Transform chunkContainer;
     public Transform obstacleContainer;
 
+    private Coroutine chunkTask;
     private BoxCollider _collider;
     private List<Ground> _childs = new List<Ground>();
     private List<Vector2Int> _worldObjects = new List<Vector2Int>();
@@ -64,19 +65,22 @@ public class Chunk : MonoBehaviour
         }
     }
 
-    public void EnableChunk()
+    public void ToggleChunk(bool isOn)
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(true);
-        }
+        if (chunkTask != null)
+            StopCoroutine(chunkTask);
+
+        chunkTask = StartCoroutine(ToggleChunk_Task(isOn));
     }
 
-    public void DisableChunk()
+    private IEnumerator ToggleChunk_Task(bool isOn)
     {
+        if (!isOn)
+            yield return new WaitForSeconds(2f);
+
         for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).gameObject.SetActive(false);
+            transform.GetChild(i).gameObject.SetActive(isOn);
         }
     }
 

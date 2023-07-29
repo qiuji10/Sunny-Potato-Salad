@@ -5,16 +5,15 @@ using UnityEngine.Events;
 
 public class Obstacle : MonoBehaviour
 {
-    [SerializeField] UnityEvent OnPlayerCollide;
-
+    [SerializeField] bool randomRotation = true;
     private Collider _collider;
     
-
     private void Awake()
     {
         _collider = GetComponent<Collider>();
 
-        transform.GetChild(0).rotation = Quaternion.Euler(-90f, 0f, Random.Range(0, 4) * 90f);
+        if (randomRotation)
+            transform.GetChild(0).rotation = Quaternion.Euler(-90f, 0f, Random.Range(0, 4) * 90f);
     }
 
     private void OnTriggerEnter(Collider col)
@@ -23,7 +22,6 @@ public class Obstacle : MonoBehaviour
         {
             //_collider.enabled = false;
             StartCoroutine(TemporarilyDeactive(0.15f));
-            OnPlayerCollide?.Invoke();
         }
 
         if (col.CompareTag("Shield"))

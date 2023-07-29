@@ -48,7 +48,7 @@ public class Ground : MonoBehaviour
 
         Material[] materials = new Material[2];
         materials[0] = manager.GetBaseMaterial(name);
-        materials[1] = manager.GetBaseMaterial(name);
+        materials[1] = manager.GetExtraMaterial(name);
 
         return materials;
     }

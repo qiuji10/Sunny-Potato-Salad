@@ -100,9 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778f5001ff7cc174aaee51f7e4c1289a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPlayerCollide:
-    m_PersistentCalls:
-      m_Calls: []
+  randomRotation: 0
 --- !u!1 &3948071219368962521
 GameObject:
   m_ObjectHideFlags: 0

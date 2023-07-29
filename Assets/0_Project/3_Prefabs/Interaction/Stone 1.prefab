@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4825502187616147487
 Transform:
@@ -67,9 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778f5001ff7cc174aaee51f7e4c1289a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPlayerCollide:
-    m_PersistentCalls:
-      m_Calls: []
+  randomRotation: 1
 --- !u!1001 &5461312220664578849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152,6 +150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: stone1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2af658abd7a5bd84aa477b1e0f129118,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

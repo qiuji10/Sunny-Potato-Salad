@@ -66,7 +66,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 360c104c7ad7e414aaded0727747acc0,
         type: 3}
       propertyPath: m_Name
-      value: grasstile1 Variant
+      value: Ground V3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 360c104c7ad7e414aaded0727747acc0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
