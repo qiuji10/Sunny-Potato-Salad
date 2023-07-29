@@ -12,6 +12,7 @@ public class Chunk : MonoBehaviour
     public Vector2Int chunkSize;
     public float spacing = 1.0f;
     public Ground groundPrefab;
+    public Vector3 groundOffset = new Vector3(0, -1.5f, 0);
 
     [Header("References")]
     public Transform chunkContainer;
@@ -56,7 +57,7 @@ public class Chunk : MonoBehaviour
             {
                 Vector3 groundPosition = new Vector3((x + xOffset) * spacing, 0, (y + yOffset) * spacing);
                 Ground newGround = Instantiate(groundPrefab, chunkContainer);
-                newGround.transform.localPosition = groundPosition;
+                newGround.transform.localPosition = groundPosition + groundOffset;
                 newGround.SetGroundState(GroundState.Default);
                 _childs.Add(newGround);
             }

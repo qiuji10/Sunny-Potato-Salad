@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldObjects:
   - objectName: Tree
-    prefab: {fileID: 3742545974463339298, guid: 8da2b48e239390c46a8c723c3657e361,
+    prefab: {fileID: 5716941319405336486, guid: aaae7a84f2938154189b410708f4435d,
       type: 3}
     minMaxRange: {x: 0, y: 20}
     distribution:
@@ -50,8 +50,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-  - objectName: Rock
-    prefab: {fileID: 8760475293157617857, guid: 84971f791b2c0564eb3626a28a4a2488,
+  - objectName: Stone1
+    prefab: {fileID: 5315494684622667145, guid: d9815c227893b2844804a6066ee4858d,
       type: 3}
     minMaxRange: {x: 4, y: 10}
     distribution:
@@ -78,28 +78,74 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-  - objectName: TreasureChest
-    prefab: {fileID: 3742545974463339298, guid: 6da3673402636794eba4ab0e8ccd55c1,
+  - objectName: Stone2
+    prefab: {fileID: 6146780415082458863, guid: 1a3443d75003a28479fc9a3aa45f9b9b,
       type: 3}
-    minMaxRange: {x: 0, y: 3}
+    minMaxRange: {x: 1, y: 4}
     distribution:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.0021622137
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
+        inSlope: -0
+        outSlope: -0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
+        time: 0.8243585
+        value: 0.98891014
         inSlope: 0
         outSlope: 0
-        tangentMode: 34
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9978378
+        value: 0
+        inSlope: -2
+        outSlope: -2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - objectName: TreasureChest
+    prefab: {fileID: 3742545974463339298, guid: 6da3673402636794eba4ab0e8ccd55c1,
+      type: 3}
+    minMaxRange: {x: 0, y: 1}
+    distribution:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0021622137
+        value: 1
+        inSlope: -0
+        outSlope: -0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.8243585
+        value: 0.98891014
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9978378
+        value: 0
+        inSlope: -2
+        outSlope: -2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0

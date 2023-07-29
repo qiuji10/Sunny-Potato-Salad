@@ -13,6 +13,8 @@ public class Obstacle : MonoBehaviour
     private void Awake()
     {
         _collider = GetComponent<Collider>();
+
+        transform.GetChild(0).rotation = Quaternion.Euler(-90f, 0f, Random.Range(0, 4) * 90f);
     }
 
     private void OnTriggerEnter(Collider col)

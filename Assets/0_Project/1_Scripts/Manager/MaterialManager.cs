@@ -6,7 +6,8 @@ using UnityEngine;
 public struct MaterialData
 {
     public string materialName;
-    public Material material;
+    public Material baseMaterial;
+    public Material extraMaterial;
 }
 
 public class MaterialManager : MonoBehaviour
@@ -27,8 +28,13 @@ public class MaterialManager : MonoBehaviour
         }
     }
 
-    public Material GetMaterial(string materialName)
+    public Material GetBaseMaterial(string materialName)
     {
-        return materials.Find((data) => data.materialName == materialName).material;
+        return materials.Find((data) => data.materialName == materialName).baseMaterial;
+    }
+
+    public Material GetExtraMaterial(string materialName)
+    {
+        return materials.Find((data) => data.materialName == materialName).extraMaterial;
     }
 }

@@ -135,7 +135,8 @@ public class ChunkManager : MonoBehaviour
     private void SpawnObject(Chunk chunk)
     {
         SpawnObject("Tree", chunk);
-        SpawnObject("Rock", chunk);
+        SpawnObject("Stone1", chunk);
+        SpawnObject("Stone2", chunk);
         SpawnObject("TreasureChest", chunk);
     }
 
