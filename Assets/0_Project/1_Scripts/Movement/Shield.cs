@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    public Collider _collider;
-    public MeshRenderer _meshRenderer;
-
+    private Collider _collider;
+    private MeshRenderer _meshRenderer;
 
     private void Awake()
     {
@@ -14,10 +13,9 @@ public class Shield : MonoBehaviour
         _meshRenderer = GetComponent<MeshRenderer>();
     }
 
-
     private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Wood") || col.CompareTag("Rock"))
+        if (col.CompareTag("Tree") || col.CompareTag("Rock"))
         {
             StartCoroutine(TemporarilyDeactive(0.15f));
         }

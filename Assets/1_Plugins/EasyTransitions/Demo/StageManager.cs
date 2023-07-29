@@ -3,10 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransitionLoadScene : MonoBehaviour
+public class StageManager : MonoBehaviour
 {
+    public static StageManager Instance;
+
     public List<TransitionSettings> transitions;
     public float startDelay;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void LoadScene(string _sceneName)
     {

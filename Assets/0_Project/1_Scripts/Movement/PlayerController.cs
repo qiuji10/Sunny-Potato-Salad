@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public enum DirectionStates
 {
@@ -11,7 +12,6 @@ public enum DirectionStates
     left,
     right
 }
-
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,20 +26,25 @@ public class PlayerController : MonoBehaviour
     public float swipeDuration;
     private float _firstTapTime;
 
-    private Vector3 _firstTouchPos;
-
-    private DirectionStates _direction;
-    private Vector3 _nextPosition;
-    private Vector3 _prevPosition;
-
     [Header("Ability Modify")]
     public GameObject shield;
     public float diggingLength = 1.25f;
     public float stunLength;
 
-    private bool _ReceivedBuffSpeed;
-    private Coroutine movingCoroutine;
+    [Header("Radar")]
+    public float radarRadius = 20f;
+    public Transform radar;
+    private Transform nearestChest;
 
+    private DirectionStates _direction;
+    private Vector3 _nextPosition;
+    private Vector3 _prevPosition;
+    private Vector3 _firstTouchPos;
+
+    private bool _ReceivedBuffSpeed;
+    private Coroutine movingCoroutine, radarCoroutine;
+
+    [Header("Timer")]
     [SerializeField] private Timer timer;
 
     public void Start()
@@ -56,6 +61,34 @@ public class PlayerController : MonoBehaviour
         SwipeDetection();
         ChangeDirection();
         ConstantMovement();
+        Radar();
+    }
+
+    private void Radar()
+    {
+        nearestChest = GameManager.FindNearestTreasureChest(transform.position, radarRadius);
+
+        if (nearestChest != null)
+        {
+            Vector3 direction = (nearestChest.position - radar.position).normalized;
+
+            direction.y = 0f;
+            radar.right = direction;
+
+            if (radarCoroutine == null)
+            {
+                radarCoroutine = StartCoroutine(RadarScanning());
+            }
+        }
+        else
+        {
+            if (radarCoroutine != null)
+            {
+                radar.gameObject.SetActive(false);
+                StopCoroutine(radarCoroutine);
+                radarCoroutine = null;
+            }
+        }
     }
 
     private void ConstantMovement()
@@ -245,6 +278,23 @@ public class PlayerController : MonoBehaviour
         buffSpeed = neutralSpeed;
         _ReceivedBuffSpeed = false;
         movingCoroutine = null;
+    }
+
+    private IEnumerator RadarScanning()
+    {
+        radar.gameObject.SetActive(true);
+
+        while (nearestChest != null)
+        {
+            float distance = Vector3.Distance(nearestChest.position, transform.position);
+
+            float warningInterval = Mathf.Max(distance * 0.2f, 0.5f, distance * 0.5f);
+
+            radar.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+            radar.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

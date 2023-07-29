@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private CanvasGroup pauseBG;
 
+    public static List<Transform> treasureChests = new List<Transform>();
+
     private void Awake()
     {
         Timer.OnTimerStop += Timer_OnTimerStop;
@@ -26,11 +28,13 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        treasureChests.Clear();
         Timer.OnTimerStop -= Timer_OnTimerStop;
     }
 
     public void PauseGame()
     {
+        playerController.StopAllCoroutines();
         playerController.cantMove = true;
         timeManager.StopTimer();
         StartCoroutine(GamePause_AnimationTask(true));
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void Timer_OnTimerStop()
     {
+        countdownText.alpha = 1;
         countdownText.text = "TIME OVER";
         playerController.cantMove = true;
     }
@@ -67,7 +72,7 @@ public class GameManager : MonoBehaviour
         countdownText.text = "1";
         yield return new WaitForSeconds(1);
         StartCoroutine(GameStart_AnimationTask());
-        countdownText.text = "Go Goo!";
+        countdownText.text = "Go Go Goo!";
         pauseButton.gameObject.SetActive(true);
         playerController.cantMove = false;
         countdownText.fontSize = oriFontSize;
@@ -76,6 +81,30 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         countdownText.text = "";
         
+    }
+
+    public static Transform FindNearestTreasureChest(Vector3 position, float minDistance)
+    {
+        if (treasureChests.Count == 0)
+        {
+            Debug.LogWarning("No treasure chests found!");
+            return null;
+        }
+
+        Transform nearestTreasureChest = null;
+        float nearestDistance = float.MaxValue;
+
+        for (int i = 0; i < treasureChests.Count; i++)
+        {
+            float distance = Vector3.Distance(position, treasureChests[i].position);
+            if (distance < nearestDistance && distance <= minDistance)
+            {
+                nearestTreasureChest = treasureChests[i];
+                nearestDistance = distance;
+            }
+        }
+
+        return nearestTreasureChest;
     }
 
     private IEnumerator CountdownText_AnimationTask()
