@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TreasureChest : MonoBehaviour
 {
+    [SerializeField] private int score = 150;
+
     private void Start()
     {
         GameManager.treasureChests.Add(transform);
@@ -18,6 +20,7 @@ public class TreasureChest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.score += score;
             GameManager.treasureChests.Remove(transform);
         }
     }

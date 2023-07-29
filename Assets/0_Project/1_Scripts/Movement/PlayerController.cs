@@ -4,6 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public enum DirectionStates
 {
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [Header("Radar")]
     public float radarRadius = 20f;
     public Transform radar;
+    public SpriteRenderer radarRenderer;
     private Transform nearestChest;
 
     private DirectionStates _direction;
@@ -114,9 +116,11 @@ public class PlayerController : MonoBehaviour
                 _nextPosition = new Vector3(0f, 0f, 2f);
                 break;
         }
-
+        
         _prevPosition = moveCoord.position;
         moveCoord.position += _nextPosition;
+
+        GameManager.score++;
 
         animControl.SetFloat("FrontBack", moveCoord.position.x - transform.position.x);
         animControl.SetFloat("Sideway", moveCoord.position.z - transform.position.z);
@@ -230,6 +234,7 @@ public class PlayerController : MonoBehaviour
 
     public void KnockBack(float stunTime)
     {
+        GameManager.score--;
         animControl.SetTrigger("Stun");
         cantMove = true;
         moveSpeed = 5.0f / 2f;
@@ -294,22 +299,27 @@ public class PlayerController : MonoBehaviour
     {
         radar.gameObject.SetActive(true);
 
-        while (nearestChest != null)
+        while (true)
         {
-            float distance = Vector3.Distance(nearestChest.position, transform.position);
-
-            float warningInterval = Mathf.Max(distance * 0.2f, 0.5f, distance * 0.5f);
-
-            radar.gameObject.SetActive(false);
-            yield return new WaitForSeconds(0.2f);
             radar.gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.2f);
+
+            float timer = 0, maxTime = 1f;
+
+            while (timer < maxTime)
+            {
+                timer += Time.deltaTime;
+                float ratio = timer / maxTime;
+                Color color = new Color(1, 0, 0, ratio);
+                radarRenderer.color = color;
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(1f);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.CompareTag("TreasureChest"))
         {
             cantMove = true;

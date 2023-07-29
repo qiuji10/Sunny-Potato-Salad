@@ -270,6 +270,7 @@ MonoBehaviour:
   stunLength: 0
   radarRadius: 15
   radar: {fileID: 8602301185820474874}
+  radarRenderer: {fileID: 6196784187635175909}
   timer: {fileID: 0}
 --- !u!54 &58661408381427270
 Rigidbody:
