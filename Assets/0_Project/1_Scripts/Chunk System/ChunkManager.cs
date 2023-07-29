@@ -153,39 +153,61 @@ public class ChunkManager : MonoBehaviour
 
         for (int j = 0; j < randomAmount; j++)
         {
-            Vector2Int randomPos = chunk.GetRandomPosition();
+            Vector2Int randPos = GenerateRandomPosition(chunk);
 
-            if (randomPos == Vector2Int.one)
+            if (randPos == Vector2Int.one)
                 continue;
-            
-            if (chunk.AddObjectPosition(randomPos))
+
+            if (chunk.AddObjectPosition(randPos))
             {
                 GameObject worldObject = Instantiate(objectPrefab, chunk.obstacleContainer);
-                worldObject.transform.position = new Vector3(randomPos.x, 1, randomPos.y);
+                worldObject.transform.position = new Vector3(randPos.x, 1, randPos.y);
             }
+
+            //Vector2Int randomPos = chunk.GetChunkPosition();
+
+            //if (randomPos == Vector2Int.one)
+            //    continue;
+            
+            //if (chunk.AddObjectPosition(randomPos))
+            //{
+            //    GameObject worldObject = Instantiate(objectPrefab, chunk.obstacleContainer);
+            //    worldObject.transform.position = new Vector3(randomPos.x, 1, randomPos.y);
+            //}
         }
     }
 
     private Vector2Int GenerateRandomPosition(Chunk chunk)
     {
-        Vector2Int randomPos = chunk.GetRandomPosition();
+        Vector2Int position = chunk.GetChunkLocalPosition() + new Vector2Int(Random.Range(-chunk.chunkSize.x, chunk.chunkSize.x), Random.Range(-chunk.chunkSize.x, chunk.chunkSize.x));
 
-        int overflowGuard = chunk.maxTile - 1;
-        int overflowCounter = 0;
-
-        if (chunk.WorldObjects.Contains(randomPos))
+        if (position.x % 2 == 0)
         {
-            overflowCounter++;
-
-            if (overflowCounter >= overflowGuard)
-                return randomPos;
-
-            return GenerateRandomPosition(chunk);
+            if (position.x == 6)
+            {
+                position.x = 7;
+            }
+            else
+            {
+                position.x -= 1; // Make the x coordinate odd
+            }
         }
-        else
+
+        if (position.y % 2 == 0)
         {
-            return randomPos;
+            
+
+            if (position.y == 6)
+            {
+                position.y = 7;
+            }
+            else
+            {
+                position.y -= 1; // Make the y coordinate odd
+            }
         }
+
+        return position;
     }
 
     public static Ground GetGround(Vector3 position)

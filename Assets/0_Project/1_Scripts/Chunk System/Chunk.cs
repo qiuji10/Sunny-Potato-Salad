@@ -92,24 +92,28 @@ public class Chunk : MonoBehaviour
         return new Vector2Int(x, z);
     }
 
-    public Vector2Int GetRandomPosition()
+    public Vector2Int GetChunkLocalPosition()
     {
-        Vector2Int chunkPos = GetChunkPosition();
+        int x = Mathf.RoundToInt(transform.localPosition.x);
+        int z = Mathf.RoundToInt(transform.localPosition.z);
 
-        int minX = chunkPos.x - chunkSize.x / 2;
-        int maxX = chunkPos.x + chunkSize.x / 2;
-        int minY = chunkPos.y - chunkSize.y / 2;
-        int maxY = chunkPos.y + chunkSize.y / 2;
-
-        int randomX = Random.Range(minX, maxX + 1);
-        int randomY = Random.Range(minY, maxY + 1);
-
-        // Make sure both randomX and randomY are odd numbers
-        randomX |= 1;
-        randomY |= 1;
-
-        return new Vector2Int(randomX, randomY);
+        return new Vector2Int(x, z);
     }
+
+    //public Vector2Int GetRandomPosition()
+    //{
+    //    Vector2Int chunkPos = GetChunkPosition();
+
+    //    int minX = chunkPos.x - chunkSize.x -1 / 2;
+    //    int maxX = chunkPos.x + chunkSize.x + 1 / 2;
+    //    int minY = chunkPos.y - chunkSize.y - 1 / 2;
+    //    int maxY = chunkPos.y + chunkSize.y + 1 / 2;
+
+    //    int randomX = Random.Range(minX, maxX + 2);
+    //    int randomY = Random.Range(minY, maxY + 2);
+
+    //    return new Vector2Int(randomX, randomY);
+    //}
 
     public bool AddObjectPosition(Vector2Int position)
     {
