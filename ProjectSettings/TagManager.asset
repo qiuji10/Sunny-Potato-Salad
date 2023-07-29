@@ -8,6 +8,7 @@ TagManager:
   - TreasureChest
   - Tree
   - Rock
+  - Shield
   layers:
   - Default
   - TransparentFX

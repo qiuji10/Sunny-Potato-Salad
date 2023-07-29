@@ -32,12 +32,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 _prevPosition;
 
     [Header("Ability Modify")]
-    public GameObject protectionShield;
+    public GameObject shield;
     public float diggingLength = 1.25f;
     public float stunLength;
 
     private bool _ReceivedBuffSpeed;
     private Coroutine movingCoroutine;
+
+    [SerializeField] private Timer timer;
 
     public void Start()
     {
@@ -208,7 +210,7 @@ public class PlayerController : MonoBehaviour
 
         if (rand >= 5 && rand < 7)
         {
-            protectionShield.SetActive(true);
+            shield.SetActive(true);
         }
 
         if (rand >= 7 && rand < 9)
@@ -220,7 +222,7 @@ public class PlayerController : MonoBehaviour
 
         if (rand == 9)
         {
-            //Modified Time
+            timer.IncreaseTime(15);
         }
 
     }

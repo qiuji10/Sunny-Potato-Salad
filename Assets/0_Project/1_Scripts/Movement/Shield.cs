@@ -1,30 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Obstacle : MonoBehaviour
+public class Shield : MonoBehaviour
 {
-    [SerializeField] UnityEvent OnPlayerCollide;
+    public Collider _collider;
+    public MeshRenderer _meshRenderer;
 
-    private Collider _collider;
-    
 
     private void Awake()
     {
         _collider = GetComponent<Collider>();
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
+
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Player"))
-        {
-            //_collider.enabled = false;
-            StartCoroutine(TemporarilyDeactive(0.15f));
-            OnPlayerCollide?.Invoke();
-        }
-
-        if (col.CompareTag("Shield"))
+        if (col.CompareTag("Wood") || col.CompareTag("Rock"))
         {
             StartCoroutine(TemporarilyDeactive(0.15f));
         }
@@ -33,6 +26,7 @@ public class Obstacle : MonoBehaviour
     private IEnumerator TemporarilyDeactive(float duration)
     {
         yield return new WaitForSeconds(duration);
-        gameObject.SetActive(false);
+        _collider.enabled = false;
+        _meshRenderer.enabled = false;
     }
 }
