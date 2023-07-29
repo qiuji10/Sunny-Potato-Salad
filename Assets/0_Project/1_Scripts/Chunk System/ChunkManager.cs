@@ -31,6 +31,10 @@ public class ChunkManager : MonoBehaviour
         else
         {
             Chunk chunk = Instantiate(chunkPrefab);
+
+            _chunks.Add(chunk);
+            _enabledChunks.Add(Vector2Int.zero, chunk);
+
             SpawnObject(chunk);
             Chunk_OnEnterChunk(chunk);
         }
