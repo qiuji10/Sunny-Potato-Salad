@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class ChunkManager : MonoBehaviour
 {
+    [Header("Prefabs")]
     [SerializeField] Chunk chunkPrefab;
+    [SerializeField] ChunkSettings chunkSettings;
 
-    private List<Chunk> chunks = new List<Chunk>();
-    private Dictionary<Vector2Int, Chunk> enabledChunks = new Dictionary<Vector2Int, Chunk>();
+    private List<Chunk> _chunks = new List<Chunk>();
+    private Dictionary<Vector2Int, Chunk> _enabledChunks = new Dictionary<Vector2Int, Chunk>();
+    private List<Vector2Int> _worldObjectsPos = new List<Vector2Int>();
 
     private Chunk activeChunk;
 
@@ -17,10 +20,19 @@ public class ChunkManager : MonoBehaviour
 
         Chunk[] chunks = FindObjectsOfType<Chunk>();
 
-        foreach (Chunk chunk in chunks)
+        if (chunks.Length > 0)
         {
-            this.chunks.Add(chunk);
-            enabledChunks.Add(chunk.GetChunkPosition(), chunk);
+            foreach (Chunk chunk in chunks)
+            {
+                this._chunks.Add(chunk);
+                _enabledChunks.Add(chunk.GetChunkPosition(), chunk);
+            }
+        }
+        else
+        {
+            Chunk chunk = Instantiate(chunkPrefab);
+            SpawnObject(chunk);
+            Chunk_OnEnterChunk(chunk);
         }
     }
 
@@ -31,6 +43,9 @@ public class ChunkManager : MonoBehaviour
 
     private void Chunk_OnEnterChunk(Chunk chunk)
     {
+        if (activeChunk == chunk)
+            return;
+
         activeChunk = chunk;
         RecalculateChunk();
     }
@@ -68,31 +83,31 @@ public class ChunkManager : MonoBehaviour
 
             neighbourPosition.Add(neighborChunkPos);
 
-            if (!enabledChunks.ContainsKey(neighborChunkPos))
+            if (!_enabledChunks.ContainsKey(neighborChunkPos))
             {
-                Chunk chunk = chunks.Find((chunkData) => chunkData.GetChunkPosition() == neighborChunkPos);
+                Chunk chunk = _chunks.Find((chunkData) => chunkData.GetChunkPosition() == neighborChunkPos);
 
                 if (chunk == null)
                 {
                     Chunk newChunk = Instantiate(chunkPrefab);
                     newChunk.transform.position = new Vector3(neighborChunkPos.x, activeChunk.transform.position.y, neighborChunkPos.y);
 
-                    chunks.Add(newChunk);
-                    enabledChunks.Add(neighborChunkPos, newChunk);
+                    _chunks.Add(newChunk);
+                    _enabledChunks.Add(neighborChunkPos, newChunk);
 
+                    SpawnObject(newChunk);
                 }
                 else
                 {
                     chunk.EnableChunk();
-                    enabledChunks.Add(neighborChunkPos, chunk);
+                    _enabledChunks.Add(neighborChunkPos, chunk);
                 }
                 
             }
         }
 
-        // Find chunks to disable (those that are not within the 3x3 range of the active chunk)
         List<Vector2Int> chunksToDisable = new List<Vector2Int>();
-        foreach (var item in enabledChunks)
+        foreach (var item in _enabledChunks)
         {
             Vector2Int chunkPos = item.Key;
 
@@ -102,25 +117,68 @@ public class ChunkManager : MonoBehaviour
             }
         }
 
-        // Disable the chunks that are no longer within the 3x3 range
         foreach (var chunkPos in chunksToDisable)
         {
-            if (enabledChunks[chunkPos] == activeChunk)
+            if (_enabledChunks[chunkPos] == activeChunk)
                 continue;
 
-            enabledChunks[chunkPos].DisableChunk();
-            enabledChunks.Remove(chunkPos);
+            _enabledChunks[chunkPos].DisableChunk();
+            _enabledChunks.Remove(chunkPos);
+        }
+    }
+
+    private void SpawnObject(Chunk chunk)
+    {
+        SpawnObject("Tree", chunk);
+        SpawnObject("Rock", chunk);
+        SpawnObject("TreasureChest", chunk);
+    }
+
+    private void SpawnObject(string objectName, Chunk chunk)
+    {
+        GameObject objectPrefab = chunkSettings.GetPrefab(objectName);
+        int randomAmount = chunkSettings.GetRandomAmount(objectName);
+
+        if (randomAmount > chunk.maxTile)
+        {
+            Debug.Log("Settings Overflow");
+            return;
         }
 
-        //foreach (var item in enabledChunks)
-        //{
-        //    if (item.Value == activeChunk)
-        //        continue;
+        for (int j = 0; j < randomAmount; j++)
+        {
+            Vector2Int randomPos = chunk.GetRandomPosition();
 
-        //    if (!neighbourPosition.Contains(item.Key))
-        //    {
-        //        item.Value.DisableChunk();
-        //    }
-        //}
+            if (randomPos == Vector2Int.one)
+                continue;
+            
+            if (chunk.AddObjectPosition(randomPos))
+            {
+                GameObject worldObject = Instantiate(objectPrefab, chunk.obstacleContainer);
+                worldObject.transform.position = new Vector3(randomPos.x, 1, randomPos.y);
+            }
+        }
+    }
+
+    private Vector2Int GenerateRandomPosition(Chunk chunk)
+    {
+        Vector2Int randomPos = chunk.GetRandomPosition();
+
+        int overflowGuard = chunk.maxTile - 1;
+        int overflowCounter = 0;
+
+        if (chunk.WorldObjects.Contains(randomPos))
+        {
+            overflowCounter++;
+
+            if (overflowCounter >= overflowGuard)
+                return randomPos;
+
+            return GenerateRandomPosition(chunk);
+        }
+        else
+        {
+            return randomPos;
+        }
     }
 }

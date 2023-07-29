@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkPrefab: {fileID: 8604189241650559227, guid: dcc2a830a22e01342839c78f388da6b2,
     type: 3}
+  chunkSettings: {fileID: 11400000, guid: 8e2b611e1e1ceae4db21e0429c1a0070, type: 2}

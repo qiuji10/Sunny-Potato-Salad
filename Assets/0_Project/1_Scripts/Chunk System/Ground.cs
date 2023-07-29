@@ -6,8 +6,8 @@ public enum GroundState { Default, Digged }
 
 public class Ground : MonoBehaviour
 {
-    private GroundState state;
-    public GroundState State => state;
+    private GroundState _state;
+    public GroundState State => _state;
 
     private MeshRenderer _mesh;
 
@@ -20,7 +20,7 @@ public class Ground : MonoBehaviour
     {
         MaterialManager manager = MaterialManager.Instance;
 
-        this.state = state;
+        this._state = state;
 
         switch (state)
         {
