@@ -1,6 +1,7 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum DirectionStates
 {
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public bool cantMove;
     public float moveSpeed = 5.0f;
+    private float neutralSpeed;
+    private float buffSpeed;
     public Transform moveCoord;
 
     [Header("Swipe Settings")]
@@ -28,10 +31,19 @@ public class PlayerController : MonoBehaviour
     private Vector3 _nextPosition;
     private Vector3 _prevPosition;
 
+    [Header("Ability Modify")]
+    public GameObject protectionShield;
+    public float diggingLength = 1.25f;
+    public float stunLength;
+
+    private bool _ReceivedBuffSpeed;
+    private Coroutine movingCoroutine;
+
     public void Start()
     {
         moveCoord.parent = null;
 
+        neutralSpeed = buffSpeed = moveSpeed;
         _direction = DirectionStates.forward;
     }
 
@@ -123,13 +135,11 @@ public class PlayerController : MonoBehaviour
             //do left or right
             if (delta.x > 0)
             {
-                Debug.Log("Right");
                 _direction = DirectionStates.right;
             }
 
             else if (delta.x < 0)
             {
-                Debug.Log("Left");
                 _direction = DirectionStates.left;
             }
         }
@@ -149,12 +159,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator Digging(float duration)
+    private IEnumerator Digging()
     {
         Ground ground = ChunkManager.GetGround(transform.position);
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(diggingLength);
         ground.SetGroundState(GroundState.Digged);
-
+        TreasureChest_AbilityPoint();
         cantMove = false;
     }
 
@@ -167,7 +177,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator MovementSlowed(float duration)
     {
         yield return new WaitForSeconds(duration);
-        moveSpeed = 5.0f;
+        moveSpeed = _ReceivedBuffSpeed ? buffSpeed : neutralSpeed;
     }
 
     public void KnockBack(float stunTime)
@@ -179,13 +189,64 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MovementSlowed(stunTime));
     }
 
+    public void TreasureChest_AbilityPoint()
+    {
+        int rand = Random.Range(0, 10);
+
+        if (rand >= 0 && rand < 5)
+        {
+            Debug.Log("Speed Earn");
+
+            if (movingCoroutine != null)
+                StopCoroutine(movingCoroutine);
+
+            _ReceivedBuffSpeed = true;
+            buffSpeed *= 1.05f;
+            moveSpeed = buffSpeed;
+            movingCoroutine = StartCoroutine(MovementSpeed());
+        }
+
+        if (rand >= 5 && rand < 7)
+        {
+            protectionShield.SetActive(true);
+        }
+
+        if (rand >= 7 && rand < 9)
+        {
+            Debug.Log("Dig Buff");
+            diggingLength = 0.15f;
+            StartCoroutine(DiggingSpeed());
+        }
+
+        if (rand == 9)
+        {
+            //Modified Time
+        }
+
+    }
+
+    private IEnumerator DiggingSpeed()
+    {
+        yield return new WaitForSeconds(15.0f);
+        diggingLength = 1.25f;
+    }
+
+    private IEnumerator MovementSpeed()
+    {
+        yield return new WaitForSeconds(5.0f);
+        buffSpeed = neutralSpeed;
+        _ReceivedBuffSpeed = false;
+        movingCoroutine = null;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.CompareTag("TreasureChest"))
         {
             cantMove = true;
-            StartCoroutine(Digging(0.5f));
+            other.gameObject.SetActive(false);
+            StartCoroutine(Digging());
         }
 
         if (other.CompareTag("Tree"))
