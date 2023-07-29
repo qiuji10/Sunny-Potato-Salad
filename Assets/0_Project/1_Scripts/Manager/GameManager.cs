@@ -1,9 +1,8 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI.Extensions.Examples;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,12 +13,17 @@ public class GameManager : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private TMP_Text scoreText;
 
     [Header("Pause Menu")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private CanvasGroup pauseBG;
 
+    [Header("Game End Menu")]
+    [SerializeField] private RectTransform endMenu;
+    [SerializeField] private TMP_Text menuScoreText;
+    [SerializeField] private TMP_Text menuHighScoreText;
     public static int score = 0;
     public static List<Transform> treasureChests = new List<Transform>();
 
@@ -52,9 +56,24 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GamePause_AnimationTask(false));
     }
 
+    [Button]
     private void Timer_OnTimerStop()
     {
+        pauseButton.gameObject.SetActive(false);
+
+        int highscore = PlayerPrefs.GetInt("highscore");
+
+        if (score > highscore)
+        {
+            PlayerPrefs.SetInt("highscore", score);
+        }
+
+        highscore = PlayerPrefs.GetInt("highscore");
+
         countdownText.text = "TIME OVER";
+        menuScoreText.text = score.ToString();
+        menuHighScoreText.text = highscore.ToString();
+
         playerController.cantMove = true;
         StartCoroutine(GameEnd_AnimationTask());
     }
@@ -85,6 +104,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         countdownText.text = "";
         
+    }
+
+    private void Update()
+    {
+        scoreText.text = $"Score\n{score}";
     }
 
     public static Transform FindNearestTreasureChest(Vector3 position, float minDistance)
@@ -245,14 +269,20 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(0.5f);
+
         timer = 0;
-        maxTime = 1f;
+        maxTime = 0.3f;
+
+        endMenu.gameObject.SetActive(true);
 
         while (timer < maxTime)
         {
             timer += Time.deltaTime;
 
             float ratio = timer / maxTime;
+
+            endMenu.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, ratio);
 
             gameStateTransform.anchoredPosition = Vector3.Lerp(oriPosition, destination, ratio);
 
