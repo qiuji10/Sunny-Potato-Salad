@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 _nextPosition;
     private Vector3 _prevPosition;
-    private bool _digging;
+
+    private bool _cantMove;
 
     public void Start()
     {
@@ -44,9 +45,11 @@ public class PlayerController : MonoBehaviour
 
     private void ConstantMovement()
     {
+        if (_cantMove) return;
+
         transform.position = Vector3.MoveTowards(transform.position, moveCoord.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.1f) return;
+        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.0001f) return;
 
         switch (_direction)
         {
@@ -93,12 +96,36 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Digging(float duration)
     {
-
         yield return new WaitForSeconds(duration);
+
+    }
+
+    private IEnumerator StunDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        _cantMove = false;
+    }
+
+    private void KnockBackDirection()
+    {
+        moveCoord.position = _prevPosition;
     }
 
     private void OnTriggerEnter(Collider other)
     {
 
+        //if (other.CompareTag("Treasure"))
+        //{
+            
+        //}
+
+        if (other.CompareTag("Obstacle"))
+        {
+            _cantMove = true;
+            KnockBackDirection();
+            StartCoroutine(StunDuration(0.25f));
+        }
     }
+
+
 }

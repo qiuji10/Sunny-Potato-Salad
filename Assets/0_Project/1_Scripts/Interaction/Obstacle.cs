@@ -8,18 +8,26 @@ public class Obstacle : MonoBehaviour
     [SerializeField] UnityEvent OnPlayerCollide;
 
     private Collider _collider;
+    
 
     private void Awake()
     {
         _collider = GetComponent<Collider>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (col.CompareTag("Player"))
         {
-            _collider.enabled = false;
+            //_collider.enabled = false;
+            StartCoroutine(TemporarilyDeactive(0.15f));
             OnPlayerCollide?.Invoke();
         }
+    }
+
+    private IEnumerator TemporarilyDeactive(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        gameObject.SetActive(false);
     }
 }
