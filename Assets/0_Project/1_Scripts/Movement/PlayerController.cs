@@ -15,6 +15,8 @@ public enum DirectionStates
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animControl;
+
     [Header("Movement")]
     public bool cantMove;
     public float moveSpeed = 5.0f;
@@ -82,6 +84,9 @@ public class PlayerController : MonoBehaviour
 
         _prevPosition = moveCoord.position;
         moveCoord.position += _nextPosition;
+
+        animControl.SetFloat("FrontBack", moveCoord.position.x - transform.position.x);
+        animControl.SetFloat("Sideway", moveCoord.position.z - transform.position.z);
     }
 
     private void ChangeDirection()
