@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI.Extensions.Examples;
 
 public class GameManager : MonoBehaviour
@@ -19,15 +20,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private CanvasGroup pauseBG;
 
+    public static int score = 0;
     public static List<Transform> treasureChests = new List<Transform>();
 
     private void Awake()
     {
+        score = 0;
         Timer.OnTimerStop += Timer_OnTimerStop;
     }
 
     private void OnDestroy()
     {
+        score = 0;
         treasureChests.Clear();
         Timer.OnTimerStop -= Timer_OnTimerStop;
     }
@@ -50,9 +54,9 @@ public class GameManager : MonoBehaviour
 
     private void Timer_OnTimerStop()
     {
-        countdownText.alpha = 1;
         countdownText.text = "TIME OVER";
         playerController.cantMove = true;
+        StartCoroutine(GameEnd_AnimationTask());
     }
 
     private IEnumerator Start()
@@ -218,5 +222,44 @@ public class GameManager : MonoBehaviour
             rect.localScale = oriScale;
 
         }
+    }
+
+    private IEnumerator GameEnd_AnimationTask()
+    {
+        float timer = 0;
+        float maxTime = 0.3f;
+
+        RectTransform gameStateTransform = textBG.transform as RectTransform;
+        Vector2 oriPosition = gameStateTransform.anchoredPosition;
+        Vector2 destination = oriPosition + new Vector2(0, Screen.height - oriPosition.y);
+
+        while (timer < maxTime)
+        {
+            timer += Time.deltaTime;
+
+            float ratio = timer / maxTime;
+
+            textBG.alpha = ratio;
+            countdownText.alpha = ratio;
+            
+            yield return null;
+        }
+
+        timer = 0;
+        maxTime = 1f;
+
+        while (timer < maxTime)
+        {
+            timer += Time.deltaTime;
+
+            float ratio = timer / maxTime;
+
+            gameStateTransform.anchoredPosition = Vector3.Lerp(oriPosition, destination, ratio);
+
+            yield return null;
+        }
+
+        textBG.alpha = 1;
+        countdownText.alpha = 1;
     }
 }

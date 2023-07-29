@@ -4,6 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public enum DirectionStates
 {
@@ -115,9 +116,11 @@ public class PlayerController : MonoBehaviour
                 _nextPosition = new Vector3(0f, 0f, 2f);
                 break;
         }
-
+        
         _prevPosition = moveCoord.position;
         moveCoord.position += _nextPosition;
+
+        GameManager.score++;
 
         animControl.SetFloat("FrontBack", moveCoord.position.x - transform.position.x);
         animControl.SetFloat("Sideway", moveCoord.position.z - transform.position.z);
@@ -231,6 +234,7 @@ public class PlayerController : MonoBehaviour
 
     public void KnockBack(float stunTime)
     {
+        GameManager.score--;
         animControl.SetTrigger("Stun");
         cantMove = true;
         moveSpeed = 5.0f / 2f;
