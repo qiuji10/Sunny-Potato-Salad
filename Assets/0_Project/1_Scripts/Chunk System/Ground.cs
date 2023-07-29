@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GroundState { Default, Digged }
+public enum GroundState { Default, Digged, Stepped}
 
 public class Ground : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class Ground : MonoBehaviour
 
     private string[] defaultGround = { "default_ground_1", "default_ground_2", "default_ground_3" };
     private string[] dirtGround = { "dirt_ground_1", "dirt_ground_2", "dirt_ground_3" };
+    private string[] stepGround = { "step_ground_1", "step_ground_2", "step_ground_3" };
 
     private void Awake()
     {
@@ -39,6 +40,11 @@ public class Ground : MonoBehaviour
                 _mesh.materials = GetMaterials(RandomString(dirtGround));
                 //_mesh.material = manager.GetBaseMaterial("dirt_ground");
                 break;
+
+            case GroundState.Stepped:
+                _mesh.materials = GetMaterials(RandomString(stepGround));
+                break;
+            
         }
     }
 
