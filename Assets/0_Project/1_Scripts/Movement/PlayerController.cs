@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, moveCoord.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.05f) return;
+        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.1f) return;
 
         switch (_direction)
         {
