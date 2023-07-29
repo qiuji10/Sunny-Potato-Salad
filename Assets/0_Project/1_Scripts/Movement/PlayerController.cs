@@ -22,13 +22,13 @@ public class PlayerController : MonoBehaviour
     private DirectionStates _direction;
     private GeneralStates _action;
 
+    public bool cantMove;
     public float moveSpeed = 5.0f;
     public Transform moveCoord;
 
     private Vector3 _nextPosition;
     private Vector3 _prevPosition;
 
-    private bool _cantMove;
 
     public void Start()
     {
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void ConstantMovement()
     {
-        if (_cantMove) return;
+        if (cantMove) return;
 
         transform.position = Vector3.MoveTowards(transform.position, moveCoord.position, moveSpeed * Time.deltaTime);
 

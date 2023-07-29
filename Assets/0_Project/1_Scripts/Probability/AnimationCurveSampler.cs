@@ -14,34 +14,6 @@ public class AnimationCurveSampler
         _integratedDensity = new IntegrateFunc(curve.Evaluate, curve.keys[0].time, curve.keys[curve.length - 1].time, integrationSteps);
     }
 
-    //private float Invert(float s)
-    //{
-    //    s *= _integratedDensity.Total;
-    //    float lower = MinT;
-    //    float upper = MaxT;
-    //    const float precision = 0.00001f;
-
-    //    while (upper - lower > precision)
-    //    {
-    //        float mid = (lower + upper) / 2f;
-    //        float d = _integratedDensity.Evaluate(mid);
-    //        if (d > s)
-    //        {
-    //            upper = mid;
-    //        }
-    //        else if (d < s)
-    //        {
-    //            lower = mid;
-    //        }
-    //        else
-    //        {
-    //            return mid;
-    //        }
-    //    }
-
-    //    return (lower + upper) / 2f;
-    //}
-
     private float Invert(float x)
     {
         float targetValue = _densityCurve.Evaluate(x);

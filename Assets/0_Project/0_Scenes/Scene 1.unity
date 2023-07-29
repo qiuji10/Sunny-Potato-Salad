@@ -560,6 +560,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5964184724110397657}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1020226884 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3043151069425373271, guid: 7a97712592b056f41be58d8b3463ea4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5964184724110397657}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b76f97cb542784c85eb2b83daf586a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1729322840 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5107057465010281467, guid: d08d62233d68c044686883c15e22cfca,
@@ -590,6 +602,16 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 1729322840}
+    - target: {fileID: 130668747715804595, guid: 5724537e96b33c94f82f06c67e9abfd6,
+        type: 3}
+      propertyPath: countdownText
+      value: 
+      objectReference: {fileID: 8806054278961050310}
+    - target: {fileID: 130668747715804595, guid: 5724537e96b33c94f82f06c67e9abfd6,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1020226884}
     - target: {fileID: 8782745540835298801, guid: 5724537e96b33c94f82f06c67e9abfd6,
         type: 3}
       propertyPath: m_RootOrder
@@ -789,11 +811,6 @@ PrefabInstance:
     - target: {fileID: 6451771283668933709, guid: 7a97712592b056f41be58d8b3463ea4f,
         type: 3}
       propertyPath: m_Name
-      value: Player (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451771283668933709, guid: 7a97712592b056f41be58d8b3463ea4f,
-        type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1158,3 +1175,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d58cc52651b958e4aba06323fb9fbb03, type: 3}
+--- !u!114 &8806054278961050310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6907185894297770691, guid: d58cc52651b958e4aba06323fb9fbb03,
+    type: 3}
+  m_PrefabInstance: {fileID: 8806054278961050309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
