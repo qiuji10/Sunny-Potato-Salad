@@ -15,6 +15,8 @@ public enum DirectionStates
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animControl;
+
     [Header("Movement")]
     public bool cantMove;
     public float moveSpeed = 5.0f;
@@ -115,6 +117,9 @@ public class PlayerController : MonoBehaviour
 
         _prevPosition = moveCoord.position;
         moveCoord.position += _nextPosition;
+
+        animControl.SetFloat("FrontBack", moveCoord.position.x - transform.position.x);
+        animControl.SetFloat("Sideway", moveCoord.position.z - transform.position.z);
     }
 
     private void ChangeDirection()
@@ -203,7 +208,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Digging()
     {
         Ground ground = ChunkManager.GetGround(transform.position);
+        animControl.SetBool("dig", true);
         yield return new WaitForSeconds(diggingLength);
+        animControl.SetBool("dig", false);
         ground.SetGroundState(GroundState.Digged);
         TreasureChest_AbilityPoint();
         cantMove = false;
@@ -223,6 +230,7 @@ public class PlayerController : MonoBehaviour
 
     public void KnockBack(float stunTime)
     {
+        animControl.SetTrigger("Stun");
         cantMove = true;
         moveSpeed = 5.0f / 2f;
         moveCoord.position = _prevPosition;
@@ -249,6 +257,7 @@ public class PlayerController : MonoBehaviour
 
         if (rand >= 5 && rand < 7)
         {
+            Debug.Log("Shield");
             shield.SetActive(true);
         }
 
@@ -261,20 +270,21 @@ public class PlayerController : MonoBehaviour
 
         if (rand == 9)
         {
-            timer.IncreaseTime(15);
+            Debug.Log("Time Expend");
+            timer.IncreaseTime(30);
         }
 
     }
 
     private IEnumerator DiggingSpeed()
     {
-        yield return new WaitForSeconds(15.0f);
+        yield return new WaitForSeconds(30.0f);
         diggingLength = 1.25f;
     }
 
     private IEnumerator MovementSpeed()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(12.0f);
         buffSpeed = neutralSpeed;
         _ReceivedBuffSpeed = false;
         movingCoroutine = null;
