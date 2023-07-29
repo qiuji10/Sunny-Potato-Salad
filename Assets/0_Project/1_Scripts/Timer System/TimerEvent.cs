@@ -19,6 +19,6 @@ public class TimerEvent : MonoBehaviour
 
     private void Timer_OnTimerChange(float time)
     {
-        timerText.text = Timer.FormatTime(time);
+        if (timerText) timerText.text = Timer.FormatTime(time);
     }
 }

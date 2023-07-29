@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour
     private bool _isRunning = false;
 
     public static event Action<float> OnTimerChange;
+    public static event Action OnTimerStop;
 
     [Button]
     public void StartTimer()
@@ -57,6 +58,7 @@ public class Timer : MonoBehaviour
             {
                 _remainingTime = 0f;
                 _isRunning = false;
+                OnTimerStop?.Invoke();
             }
 
             OnTimerChange?.Invoke(_remainingTime);
