@@ -20,6 +20,7 @@ public enum GeneralStates
 public class PlayerController : MonoBehaviour
 {
     private DirectionStates _direction;
+    private GeneralStates _action;
 
     public float moveSpeed = 5.0f;
     public Transform moveCoord;
@@ -38,9 +39,20 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
+        ActionStates();
+    }
 
-        ChangeDirection();
-        ConstantMovement();
+    private void ActionStates()
+    {
+        switch(_action)
+        {
+            case GeneralStates.move:
+                ChangeDirection();
+                ConstantMovement();
+                break;
+            case GeneralStates.bounce:
+                break;
+        }
     }
 
     private void ConstantMovement()
@@ -103,12 +115,13 @@ public class PlayerController : MonoBehaviour
     private IEnumerator StunDuration(float duration)
     {
         yield return new WaitForSeconds(duration);
-        _cantMove = false;
+        _action = GeneralStates.move;
     }
 
     private void KnockBackDirection()
     {
-        moveCoord.position = _prevPosition;
+        //Vector3 shakeMovement = 
+        //transform.position = Vector3.MoveTowards(transform.position, , moveSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -121,8 +134,8 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Obstacle"))
         {
-            _cantMove = true;
-            KnockBackDirection();
+            _action = GeneralStates.bounce;
+            moveCoord.position = _prevPosition;
             StartCoroutine(StunDuration(0.25f));
         }
     }
