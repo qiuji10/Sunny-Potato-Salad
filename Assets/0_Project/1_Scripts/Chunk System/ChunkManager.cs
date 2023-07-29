@@ -10,12 +10,13 @@ public class ChunkManager : MonoBehaviour
 
     private List<Chunk> _chunks = new List<Chunk>();
     private Dictionary<Vector2Int, Chunk> _enabledChunks = new Dictionary<Vector2Int, Chunk>();
-    private List<Vector2Int> _worldObjectsPos = new List<Vector2Int>();
 
-    private Chunk activeChunk;
+    private static Chunk activeChunk;
 
     private void Awake()
     {
+        activeChunk = null;
+
         Chunk.OnEnterChunk += Chunk_OnEnterChunk;
 
         Chunk[] chunks = FindObjectsOfType<Chunk>();
@@ -184,5 +185,10 @@ public class ChunkManager : MonoBehaviour
         {
             return randomPos;
         }
+    }
+
+    public static Ground GetGround(Vector3 position)
+    {
+        return activeChunk.GetNearestGround(position);
     }
 }

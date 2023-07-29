@@ -18,7 +18,7 @@ public class Chunk : MonoBehaviour
     public Transform obstacleContainer;
 
     private BoxCollider _collider;
-    private List<GameObject> _childs = new List<GameObject>();
+    private List<Ground> _childs = new List<Ground>();
     private List<Vector2Int> _worldObjects = new List<Vector2Int>();
 
     public int maxTile => chunkSize.x * chunkSize.y;
@@ -58,7 +58,7 @@ public class Chunk : MonoBehaviour
                 Ground newGround = Instantiate(groundPrefab, chunkContainer);
                 newGround.transform.localPosition = groundPosition;
                 newGround.SetGroundState(GroundState.Default);
-                _childs.Add(newGround.gameObject);
+                _childs.Add(newGround);
             }
         }
     }
@@ -117,6 +117,27 @@ public class Chunk : MonoBehaviour
             _worldObjects.Add(position);
             return true;
         }
+    }
+
+    public Ground GetNearestGround(Vector3 position)
+    {
+        Ground nearestGround = null;
+        float nearestDistance = float.MaxValue;
+
+        for (int i = 0; i < _childs.Count; i++)
+        {
+            Ground currentGround = _childs[i];
+            Vector3 groundPosition = currentGround.transform.position;
+            float distance = Vector3.Distance(position, groundPosition);
+
+            if (distance < nearestDistance)
+            {
+                nearestGround = currentGround;
+                nearestDistance = distance;
+            }
+        }
+
+        return nearestGround;
     }
 
     private void UpdateColliderSize()
