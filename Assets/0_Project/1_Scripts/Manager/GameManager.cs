@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
 
         RectTransform gameStateTransform = textBG.transform as RectTransform;
         Vector2 oriPosition = gameStateTransform.anchoredPosition;
-        Vector2 destination = oriPosition + new Vector2(0, Screen.height - oriPosition.y);
+        Vector2 destination = new Vector2(0, 240);
 
         while (timer < maxTime)
         {
