@@ -155,6 +155,8 @@ MonoBehaviour:
   cantMove: 0
   moveSpeed: 5
   moveCoord: {fileID: 3515522844678890798}
+  swipeDeadZone: 0
+  swipeDuration: 2
 --- !u!54 &58661408381427270
 Rigidbody:
   m_ObjectHideFlags: 0

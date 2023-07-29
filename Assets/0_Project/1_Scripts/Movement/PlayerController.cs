@@ -13,12 +13,18 @@ public enum DirectionStates
 
 public class PlayerController : MonoBehaviour
 {
-    private DirectionStates _direction;
-
+    [Header("Movement")]
     public bool cantMove;
     public float moveSpeed = 5.0f;
     public Transform moveCoord;
 
+    [Header("Swipe Settings")]
+    public float swipeDuration;
+    private float _firstTapTime;
+
+    private Vector3 _firstTouchPos;
+
+    private DirectionStates _direction;
     private Vector3 _nextPosition;
     private Vector3 _prevPosition;
 
@@ -86,25 +92,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    [SerializeField] float swipeDeadZone;
-    [SerializeField] float swipeDuration;
-    float firstTapTime;
-
-    Vector3 firstTouchPos;
-
     private void SwipeDetection()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            firstTapTime = Time.time;
-            firstTouchPos = Input.mousePosition;
+            _firstTapTime = Time.time;
+            _firstTouchPos = Input.mousePosition;
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            Vector2 swipeDelta = Input.mousePosition - firstTouchPos;
+            Vector2 swipeDelta = Input.mousePosition - _firstTouchPos;
 
-            if (swipeDelta != Vector2.zero && Time.time - firstTapTime <= swipeDuration)
+            if (swipeDelta != Vector2.zero && Time.time - _firstTapTime <= swipeDuration)
             {
                 SwipeDirection(swipeDelta);
             }
