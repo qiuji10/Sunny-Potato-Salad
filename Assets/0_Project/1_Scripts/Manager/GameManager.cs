@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CanvasGroup scoreGroup;
     [SerializeField] private CanvasGroup highscoreGroup;
     [SerializeField] private CanvasGroup menuButtonGroup;
+    [SerializeField] private GameObject newHighscoreAnimation;
+
+    private bool newHighscore;
     public static int score = 0;
     public static List<Transform> treasureChests = new List<Transform>();
 
@@ -50,7 +53,8 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        playerController.StopAllCoroutines();
+        //playerController.StopAllCoroutines();
+        Time.timeScale = 0;
         playerController.cantMove = true;
         timeManager.StopTimer();
         StartCoroutine(GamePause_AnimationTask(true));
@@ -58,8 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        playerController.cantMove = false;
         Time.timeScale = 1;
+        playerController.cantMove = false;
         timeManager.ResumeTimer();
         StartCoroutine(GamePause_AnimationTask(false));
     }
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
 
         if (score > highscore)
         {
+            newHighscore = true;
             PlayerPrefs.SetInt("highscore", score);
         }
 
@@ -310,6 +315,10 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(FadeGroup(scoreGroup, 0, 1, 1));
         StartCoroutine(FadeGroup(highscoreGroup, 0, 1, 1));
+
+        if (newHighscore)
+            newHighscoreAnimation.SetActive(true);
+
         StartCoroutine(FadeGroup(menuButtonGroup, 0, 1, 1));
     }
 
