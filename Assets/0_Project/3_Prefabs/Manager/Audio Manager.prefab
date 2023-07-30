@@ -33,7 +33,7 @@ Transform:
   - {fileID: 4013543997513867254}
   - {fileID: 4467453412385169476}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2162019466015054560
 MonoBehaviour:
@@ -103,9 +103,10 @@ AudioSource:
   m_GameObject: {fileID: 2953185667479524403}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4214950037802434640, guid: 8c3479ebaf0b52e40adcc2376f148c29,
+    type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -231,12 +232,13 @@ AudioSource:
   m_GameObject: {fileID: 8159725878608209652}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5190274703331052508, guid: 8c3479ebaf0b52e40adcc2376f148c29,
+    type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

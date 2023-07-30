@@ -2201,6 +2201,12 @@ PrefabInstance:
       objectReference: {fileID: 552953734}
     - target: {fileID: 130668747715804595, guid: 5724537e96b33c94f82f06c67e9abfd6,
         type: 3}
+      propertyPath: musicData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0371cc05b99947142bf9150786f3ee50,
+        type: 2}
+    - target: {fileID: 130668747715804595, guid: 5724537e96b33c94f82f06c67e9abfd6,
+        type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1505369825}
@@ -2209,6 +2215,18 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 2065056520}
+    - target: {fileID: 130668747715804595, guid: 5724537e96b33c94f82f06c67e9abfd6,
+        type: 3}
+      propertyPath: gameBgmData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0371cc05b99947142bf9150786f3ee50,
+        type: 2}
+    - target: {fileID: 130668747715804595, guid: 5724537e96b33c94f82f06c67e9abfd6,
+        type: 3}
+      propertyPath: gameSfxData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d59694f47f8ed74bb8b198a9e3dea57,
+        type: 2}
     - target: {fileID: 130668747715804595, guid: 5724537e96b33c94f82f06c67e9abfd6,
         type: 3}
       propertyPath: pauseButton

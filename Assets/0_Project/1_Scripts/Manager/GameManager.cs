@@ -27,14 +27,13 @@ public class GameManager : MonoBehaviour
     public static int score = 0;
     public static List<Transform> treasureChests = new List<Transform>();
 
-    public AudioData musicData;
-
+    public AudioData gameBgmData;
+    public AudioData gameSfxData;
 
     private void Awake()
     {
         score = 0;
         Timer.OnTimerStop += Timer_OnTimerStop;
-        AudioManager.instance.PlayBGM(musicData, "inGame");
     }
 
     private void OnDestroy()
@@ -74,6 +73,7 @@ public class GameManager : MonoBehaviour
 
         highscore = PlayerPrefs.GetInt("highscore");
 
+        AudioManager.instance.PlaySFX(gameSfxData, "TimeOut");
         countdownText.text = "TIME OVER";
         menuScoreText.text = score.ToString();
         menuHighScoreText.text = highscore.ToString();
@@ -84,6 +84,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Start()
     {
+        AudioManager.instance.PlaySFX(gameSfxData, "Countdown");
+
         textBG.alpha = 1;
         pauseButton.gameObject.SetActive(false);
         playerController.cantMove = true;
@@ -107,7 +109,8 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         countdownText.text = "";
-        
+        AudioManager.instance.PlayBGM(gameBgmData, "InGame");
+
     }
 
     private void Update()
