@@ -115,24 +115,12 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, moveCoord.position, moveSpeed * Time.deltaTime);
 
-        switch (_direction)
-        {
-            case DirectionStates.forward:
-                _nextPosition = new Vector3(-2f, 0f, 0f);
-                break;
-            case DirectionStates.backward:
-                _nextPosition = new Vector3(2f, 0f, 0f);
-                break;
-            case DirectionStates.left:
-                _nextPosition = new Vector3(0f, 0f, -2f);
-                break;
-            case DirectionStates.right:
-                _nextPosition = new Vector3(0f, 0f, 2f);
-                break;
-        }
+        DirectionalValueUpdate();
 
         if (Vector3.Distance(transform.position, moveCoord.position) <= 0.001f)
         {
+            DirectionalValueUpdate();
+
             _prevPosition = moveCoord.position;
             moveCoord.position += _nextPosition;
 
@@ -147,6 +135,25 @@ public class PlayerController : MonoBehaviour
 
             animControl.SetFloat("FrontBack", moveCoord.position.x - transform.position.x);
             animControl.SetFloat("Sideway", moveCoord.position.z - transform.position.z);
+        }
+    }
+
+    private void DirectionalValueUpdate()
+    {
+        switch (_direction)
+        {
+            case DirectionStates.forward:
+                _nextPosition = new Vector3(-2f, 0f, 0f);
+                break;
+            case DirectionStates.backward:
+                _nextPosition = new Vector3(2f, 0f, 0f);
+                break;
+            case DirectionStates.left:
+                _nextPosition = new Vector3(0f, 0f, -2f);
+                break;
+            case DirectionStates.right:
+                _nextPosition = new Vector3(0f, 0f, 2f);
+                break;
         }
     }
 
