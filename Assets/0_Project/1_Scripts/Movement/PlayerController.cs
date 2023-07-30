@@ -3,8 +3,6 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public enum DirectionStates
 {
@@ -129,7 +127,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.0001f) return;
+        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.002f) return;
 
         _prevPosition = moveCoord.position;
         moveCoord.position += _nextPosition;
