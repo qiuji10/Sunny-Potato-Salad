@@ -39,8 +39,6 @@ public class Obstacle : MonoBehaviour
 
     private void BreakObstacle(Transform collidedObject)
     {
-        transform.GetChild(0).LookAt(transform.position + collidedObject.forward, Vector3.up);
-
         if (_anim != null)
             _anim.SetTrigger(Break);
     }
