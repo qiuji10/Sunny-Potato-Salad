@@ -5428,7 +5428,7 @@ MonoBehaviour:
   speedBuffSprite: {fileID: -1060448358, guid: ce58d7df27722d04183d10f98059be07, type: 3}
   shield: {fileID: 1470682857702375821}
   shieldChild: []
-  diggingParticle: {fileID: 5457464513841117549}
+  diggingParticle: {fileID: 0}
   diggingLength: 1.25
   stunLength: 0
   radarRadius: 15
