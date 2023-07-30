@@ -110,40 +110,39 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, moveCoord.position, moveSpeed * Time.deltaTime);
 
-        switch (_direction)
+        if (Vector3.Distance(transform.position, moveCoord.position) <= 0.0001f)
         {
-            case DirectionStates.forward:
-                _nextPosition = new Vector3(-2f, 0f, 0f);
-                break;
-            case DirectionStates.backward:
-                _nextPosition = new Vector3(2f, 0f, 0f);
-                break;
-            case DirectionStates.left:
-                _nextPosition = new Vector3(0f, 0f, -2f);
-                break;
-            case DirectionStates.right:
-                _nextPosition = new Vector3(0f, 0f, 2f);
-                break;
+            switch (_direction)
+            {
+                case DirectionStates.forward:
+                    _nextPosition = new Vector3(-2f, 0f, 0f);
+                    break;
+                case DirectionStates.backward:
+                    _nextPosition = new Vector3(2f, 0f, 0f);
+                    break;
+                case DirectionStates.left:
+                    _nextPosition = new Vector3(0f, 0f, -2f);
+                    break;
+                case DirectionStates.right:
+                    _nextPosition = new Vector3(0f, 0f, 2f);
+                    break;
+            }
+
+            _prevPosition = moveCoord.position;
+            moveCoord.position += _nextPosition;
+
+            GameManager.score++;
+
+            Ground ground = ChunkManager.GetGround(transform.position);
+            if (ground.State != GroundState.Digged)
+            {
+                ground.SetGroundState(GroundState.Stepped);
+            }
+
+
+            animControl.SetFloat("FrontBack", moveCoord.position.x - transform.position.x);
+            animControl.SetFloat("Sideway", moveCoord.position.z - transform.position.z);
         }
-
-        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.0001f) return;
-
-        _prevPosition = moveCoord.position;
-        moveCoord.position += _nextPosition;
-
-
-
-        GameManager.score++;
-
-        Ground ground = ChunkManager.GetGround(transform.position);
-        if (ground.State != GroundState.Digged)
-        {
-            ground.SetGroundState(GroundState.Stepped);
-        }
-
-
-        animControl.SetFloat("FrontBack", moveCoord.position.x - transform.position.x);
-        animControl.SetFloat("Sideway", moveCoord.position.z - transform.position.z);
     }
 
     private void ChangeDirection()
