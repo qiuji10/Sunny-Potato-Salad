@@ -811,6 +811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 602143507}
   - component: {fileID: 602143506}
+  - component: {fileID: 602143508}
   - component: {fileID: 602143505}
   m_Layer: 0
   m_Name: Stage 2 Camera - Model
@@ -930,6 +931,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &602143508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602143504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875981cd4ec406a41b61c0a5e9acc162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &680461215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2937,6 +2950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1612080803}
   - component: {fileID: 1612080802}
+  - component: {fileID: 1612080804}
   - component: {fileID: 1612080800}
   m_Layer: 0
   m_Name: Stage 1 Camera - Model
@@ -3056,6 +3070,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1612080804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612080799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875981cd4ec406a41b61c0a5e9acc162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1740586818
 GameObject:
   m_ObjectHideFlags: 0

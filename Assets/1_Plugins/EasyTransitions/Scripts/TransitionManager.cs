@@ -21,7 +21,8 @@ namespace EasyTransition
 
         private void Awake()
         {
-            instance = this;
+            if (instance == null)
+                instance = this;
         }
 
         public static TransitionManager Instance()

@@ -20,6 +20,7 @@ public class StageManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         DontDestroyOnLoad(gameObject);
@@ -27,6 +28,7 @@ public class StageManager : MonoBehaviour
 
     public void LoadScene(string _sceneName)
     {
+        Time.timeScale = 1.0f;
         AudioManager.instance.PlayBGM(transitionAudio, "SwitchScene", false);
         TransitionManager.Instance().Transition(_sceneName, GetRandomSettings(), startDelay);
     }
