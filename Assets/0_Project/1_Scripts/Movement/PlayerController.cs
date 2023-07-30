@@ -271,14 +271,14 @@ public class PlayerController : MonoBehaviour
             moveSpeed = buffSpeed;
             movingCoroutine = StartCoroutine(MovementSpeed());
 
-            panel.SetPanel(speedBuffSprite, "Captain Speedy", "Never going so fast before!");
+            panel.EnqueuePanel(speedBuffSprite, "Captain Speedy", "Never going so fast before!");
         }
 
         if (rand >= 5 && rand < 7)
         {
             Debug.Log("Shield");
             shield.SetActive(true);
-            panel.SetPanel(shieldBuffSprite, "Cute Shield", "Useful in destroy obstacles!");
+            panel.EnqueuePanel(shieldBuffSprite, "Cute Shield", "Useful in destroy obstacles!");
         }
 
         if (rand >= 7 && rand < 9)
@@ -286,17 +286,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Dig Buff");
             diggingLength = 0.15f;
             StartCoroutine(DiggingSpeed());
-            panel.SetPanel(digBuffSprite, "Diggy Diggyy", "Tired of Digging? Then dig more faster!");
+            panel.EnqueuePanel(digBuffSprite, "Diggy Diggyy", "Tired of Digging? Then dig more faster!");
         }
 
         if (rand == 9)
         {
             Debug.Log("Time Expend");
             timer.IncreaseTime(30);
-            panel.SetPanel(digBuffSprite, "I Need Time", "We Running Out Of Time! BOOM, Extra Timee");
+            panel.EnqueuePanel(digBuffSprite, "I Need Time", "We Running Out Of Time! BOOM, Extra Timee");
         }
-
-        panel.OpenPanel();
     }
 
     private IEnumerator DiggingSpeed()
