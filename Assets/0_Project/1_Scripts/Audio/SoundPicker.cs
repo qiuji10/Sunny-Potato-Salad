@@ -12,6 +12,11 @@ public class SoundPicker : MonoBehaviour
 
     private void Start()
     {
+        if (!PlayerPrefs.HasKey("MusicPreferences"))
+        {
+            PlayerPrefs.SetInt("MusicPreferences", 0);
+        }
+
         index = PlayerPrefs.GetInt("MusicPreferences");
 
         Play();
