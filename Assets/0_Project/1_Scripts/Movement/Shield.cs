@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    private Collider _collider;
-    private MeshRenderer _meshRenderer;
-
-    private void Awake()
-    {
-        _collider = GetComponent<Collider>();
-        _meshRenderer = GetComponent<MeshRenderer>();
-    }
 
     private void OnTriggerEnter(Collider col)
     {
@@ -24,7 +16,6 @@ public class Shield : MonoBehaviour
     private IEnumerator TemporarilyDeactive(float duration)
     {
         yield return new WaitForSeconds(duration);
-        _collider.enabled = false;
-        _meshRenderer.enabled = false;
+        this.gameObject.SetActive(false);
     }
 }

@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float neutralSpeed;
     private float buffSpeed;
     public Transform moveCoord;
+    public FloatingJoystick joystick;
 
     [Header("Swipe Settings")]
     public float swipeDuration;
@@ -182,27 +183,29 @@ public class PlayerController : MonoBehaviour
 
     private void SwipeDetection()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
+        //if (EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    return;
+        //}
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            _firstTapTime = Time.time;
-            _firstTouchPos = Input.mousePosition;
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    _firstTapTime = Time.time;
+        //    _firstTouchPos = Input.mousePosition;
+        //}
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            Vector2 swipeDelta = Input.mousePosition - _firstTouchPos;
+        //if (Input.GetMouseButtonUp(0))
+        //{
+        //    Vector2 swipeDelta = Input.mousePosition - _firstTouchPos;
 
-            if (swipeDelta != Vector2.zero && Time.time - _firstTapTime <= swipeDuration)
-            {
-                SwipeDirection(swipeDelta);
-            }
+        //    if (swipeDelta != Vector2.zero && Time.time - _firstTapTime <= swipeDuration)
+        //    {
+        //        SwipeDirection(swipeDelta);
+        //    }
 
-        }
+        //}
+
+        SwipeDirection(joystick.Direction);
     }
 
     private void SwipeDirection(Vector2 delta)

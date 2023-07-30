@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private GameObject buffCanvas;
 
     [Header("Pause Menu")]
     [SerializeField] private GameObject pauseMenu;
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
     [Button]
     private void Timer_OnTimerStop()
     {
+        buffCanvas.SetActive(false);
         pauseButton.gameObject.SetActive(false);
 
         int highscore = PlayerPrefs.GetInt("highscore");
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.instance.PlaySFX(gameSfxData, "Countdown");
 
+        buffCanvas.SetActive(false);
         textBG.alpha = 1;
         pauseButton.gameObject.SetActive(false);
         playerController.cantMove = true;
@@ -116,6 +119,7 @@ public class GameManager : MonoBehaviour
         playerController.cantMove = false;
         countdownText.fontSize = oriFontSize;
         timeManager.StartTimer();
+        buffCanvas.SetActive(true);
 
         yield return new WaitForSeconds(1f);
         countdownText.text = "";
