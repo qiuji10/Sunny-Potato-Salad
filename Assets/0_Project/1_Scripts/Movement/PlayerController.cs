@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
     private float _firstTapTime;
 
     [Header("Ability Modify")]
+    public Panel panel;
+    public Sprite digBuffSprite;
+    public Sprite shieldBuffSprite;
+    public Sprite timeBuffSprite;
+    public Sprite speedBuffSprite;
     public GameObject shield;
     public float diggingLength = 1.25f;
     public float stunLength;
@@ -258,12 +263,15 @@ public class PlayerController : MonoBehaviour
             buffSpeed *= 1.05f;
             moveSpeed = buffSpeed;
             movingCoroutine = StartCoroutine(MovementSpeed());
+
+            panel.SetPanel(speedBuffSprite, "Captain Speedy", "Never going so fast before!");
         }
 
         if (rand >= 5 && rand < 7)
         {
             Debug.Log("Shield");
             shield.SetActive(true);
+            panel.SetPanel(shieldBuffSprite, "Cute Shield", "Useful in destroy obstacles!");
         }
 
         if (rand >= 7 && rand < 9)
@@ -271,14 +279,17 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Dig Buff");
             diggingLength = 0.15f;
             StartCoroutine(DiggingSpeed());
+            panel.SetPanel(digBuffSprite, "Diggy Diggyy", "Tired of Digging? Then dig more faster!");
         }
 
         if (rand == 9)
         {
             Debug.Log("Time Expend");
             timer.IncreaseTime(30);
+            panel.SetPanel(digBuffSprite, "I Need Time", "We Running Out Of Time! BOOM, Extra Timee");
         }
 
+        panel.OpenPanel();
     }
 
     private IEnumerator DiggingSpeed()
