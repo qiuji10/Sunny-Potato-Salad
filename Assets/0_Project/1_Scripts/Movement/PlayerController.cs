@@ -127,6 +127,13 @@ public class PlayerController : MonoBehaviour
 
         GameManager.score++;
 
+        Ground ground = ChunkManager.GetGround(transform.position);
+        if (ground.State != GroundState.Digged)
+        {
+            ground.SetGroundState(GroundState.Stepped);
+        }
+
+
         animControl.SetFloat("FrontBack", moveCoord.position.x - transform.position.x);
         animControl.SetFloat("Sideway", moveCoord.position.z - transform.position.z);
     }
