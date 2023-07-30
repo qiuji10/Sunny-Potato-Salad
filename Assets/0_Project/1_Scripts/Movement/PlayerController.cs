@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public Sprite timeBuffSprite;
     public Sprite speedBuffSprite;
     public GameObject shield;
+    public ParticleSystem diggingParticle;
     public float diggingLength = 1.25f;
     public float stunLength;
 
@@ -225,6 +226,7 @@ public class PlayerController : MonoBehaviour
     {
         Ground ground = ChunkManager.GetGround(transform.position);
         animControl.SetBool("dig", true);
+        diggingParticle.Play();
         yield return new WaitForSeconds(diggingLength);
         animControl.SetBool("dig", false);
         ground.SetGroundState(GroundState.Digged);
