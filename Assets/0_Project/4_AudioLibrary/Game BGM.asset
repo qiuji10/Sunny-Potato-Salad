@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioList:
   - clip: {fileID: 8300000, guid: 7748cedc9fe067e44ac49b982ef9a0cb, type: 3}
-    name: InMenu1
+    name: InMenu2
     volume: 0.25
   - clip: {fileID: 8300000, guid: 374a29b16033b3b42a65b81267fe8847, type: 3}
-    name: InGame1
+    name: InGame2
     volume: 0.25
   - clip: {fileID: 8300000, guid: 3c75033775dd99f4481d88920f60a4f1, type: 3}
-    name: InMenu2
+    name: InMenu1
     volume: 1
   - clip: {fileID: 8300000, guid: 6dc348a156c5d094b99e0351906dc2ee, type: 3}
-    name: InGame2
+    name: InGame1
     volume: 0.25
   - clip: {fileID: 8300000, guid: f1799dc73cc4729418273446f753c41b, type: 3}
     name: SwitchScene
