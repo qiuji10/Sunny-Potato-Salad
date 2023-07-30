@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public Sprite timeBuffSprite;
     public Sprite speedBuffSprite;
     public GameObject shield;
+    public GameObject[] shieldChild;
     public ParticleSystem diggingParticle;
     public float diggingLength = 1.25f;
     public float stunLength;
@@ -61,6 +62,12 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         moveCoord.parent = null;
+
+        shieldChild = new GameObject[shield.transform.childCount];
+        for (int i = 0; i < shield.transform.childCount; i++)
+        {
+            shieldChild[i] = shield.transform.GetChild(i).gameObject;
+        }
 
         neutralSpeed = buffSpeed = moveSpeed;
         _direction = DirectionStates.forward;
@@ -106,8 +113,6 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, moveCoord.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.0001f) return;
-
         switch (_direction)
         {
             case DirectionStates.forward:
@@ -123,9 +128,13 @@ public class PlayerController : MonoBehaviour
                 _nextPosition = new Vector3(0f, 0f, 2f);
                 break;
         }
-        
+
+        if (Vector3.Distance(transform.position, moveCoord.position) >= 0.0001f) return;
+
         _prevPosition = moveCoord.position;
         moveCoord.position += _nextPosition;
+
+
 
         GameManager.score++;
 
@@ -285,7 +294,12 @@ public class PlayerController : MonoBehaviour
         if (rand >= 5 && rand < 7)
         {
             Debug.Log("Shield");
-            shield.SetActive(true);
+
+            for(int i = 0; i < shieldChild.Length; i++)
+            {
+                shieldChild[i].SetActive(true);
+            }
+            //shield.SetActive(true);
             panel.EnqueuePanel(shieldBuffSprite, "Cute Shield", "Useful in destroy obstacles!");
         }
 

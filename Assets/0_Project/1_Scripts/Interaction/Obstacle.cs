@@ -22,9 +22,17 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Player") || col.CompareTag("Shield"))
+        if (col.CompareTag("Player"))
         {
             StartCoroutine(TemporarilyDeactive(0.45f));
+
+            if (_anim != null)
+                _anim.SetTrigger(Break);
+        }
+
+        if (col.CompareTag("Shield"))
+        {
+            StartCoroutine(TemporarilyDeactive(0.15f));
 
             if (_anim != null)
                 _anim.SetTrigger(Break);
