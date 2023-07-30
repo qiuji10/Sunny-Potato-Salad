@@ -27,10 +27,14 @@ public class GameManager : MonoBehaviour
     public static int score = 0;
     public static List<Transform> treasureChests = new List<Transform>();
 
+    public AudioData musicData;
+
+
     private void Awake()
     {
         score = 0;
         Timer.OnTimerStop += Timer_OnTimerStop;
+        AudioManager.instance.PlayBGM(musicData, "inGame");
     }
 
     private void OnDestroy()
