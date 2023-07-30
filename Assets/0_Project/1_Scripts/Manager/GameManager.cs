@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform endMenu;
     [SerializeField] private TMP_Text menuScoreText;
     [SerializeField] private TMP_Text menuHighScoreText;
+    [SerializeField] private CanvasGroup scoreGroup;
+    [SerializeField] private CanvasGroup highscoreGroup;
+    [SerializeField] private CanvasGroup menuButtonGroup;
     public static int score = 0;
     public static List<Transform> treasureChests = new List<Transform>();
 
@@ -262,6 +265,10 @@ public class GameManager : MonoBehaviour
         float timer = 0;
         float maxTime = 0.3f;
 
+        scoreGroup.alpha = 0;
+        highscoreGroup.alpha = 0;
+        menuButtonGroup.alpha = 0;
+
         RectTransform gameStateTransform = textBG.transform as RectTransform;
         Vector2 oriPosition = gameStateTransform.anchoredPosition;
         Vector2 destination = new Vector2(0, 240);
@@ -274,7 +281,7 @@ public class GameManager : MonoBehaviour
 
             textBG.alpha = ratio;
             countdownText.alpha = ratio;
-            
+
             yield return null;
         }
 
@@ -300,5 +307,25 @@ public class GameManager : MonoBehaviour
 
         textBG.alpha = 1;
         countdownText.alpha = 1;
+
+        StartCoroutine(FadeGroup(scoreGroup, 0, 1, 1));
+        StartCoroutine(FadeGroup(highscoreGroup, 0, 1, 1));
+        StartCoroutine(FadeGroup(menuButtonGroup, 0, 1, 1));
+    }
+
+    private IEnumerator FadeGroup(CanvasGroup group, float from, float to, float duration)
+    {
+        float timer = 0;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            float ratio = timer / duration;
+
+            group.alpha = Mathf.Lerp(from, to, ratio);
+
+            yield return null;
+        }
     }
 }
