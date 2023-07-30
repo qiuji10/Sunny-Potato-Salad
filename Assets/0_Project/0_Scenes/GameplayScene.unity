@@ -7833,6 +7833,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2693129580927258615, guid: 7a97712592b056f41be58d8b3463ea4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3043151069425373271, guid: 7a97712592b056f41be58d8b3463ea4f,
         type: 3}
       propertyPath: panel
@@ -7843,6 +7848,11 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 1729322840}
+    - target: {fileID: 3043151069425373271, guid: 7a97712592b056f41be58d8b3463ea4f,
+        type: 3}
+      propertyPath: shield
+      value: 
+      objectReference: {fileID: 5964184724110397658}
     - target: {fileID: 3043151069425373271, guid: 7a97712592b056f41be58d8b3463ea4f,
         type: 3}
       propertyPath: digBuffSprite
@@ -7927,6 +7937,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6293340288456069591, guid: 7a97712592b056f41be58d8b3463ea4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6451771283668933709, guid: 7a97712592b056f41be58d8b3463ea4f,
         type: 3}
       propertyPath: m_Name
@@ -7937,6 +7952,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7549977891662470908, guid: 7a97712592b056f41be58d8b3463ea4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859793623341787840, guid: 7a97712592b056f41be58d8b3463ea4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859793623341787840, guid: 7a97712592b056f41be58d8b3463ea4f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7946,6 +7976,12 @@ PrefabInstance:
       addedObject: {fileID: 1531559960}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a97712592b056f41be58d8b3463ea4f, type: 3}
+--- !u!1 &5964184724110397658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1470682857702375821, guid: 7a97712592b056f41be58d8b3463ea4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5964184724110397657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6205664167067135567
 PrefabInstance:
   m_ObjectHideFlags: 0
