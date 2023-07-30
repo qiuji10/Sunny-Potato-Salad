@@ -3,9 +3,6 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-
 public enum DirectionStates
 {
     forward,

@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 100;
+        Application.targetFrameRate = -1;
 
         score = 0;
         Timer.OnTimerStop += Timer_OnTimerStop;
