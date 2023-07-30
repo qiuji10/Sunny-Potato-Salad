@@ -104,6 +104,7 @@ public class ChunkManager : MonoBehaviour
                 }
                 else
                 {
+                    chunk.gameObject.SetActive(true);
                     chunk.ToggleChunk(true);
                     _enabledChunks.Add(neighborChunkPos, chunk);
                 }
@@ -128,6 +129,7 @@ public class ChunkManager : MonoBehaviour
                 continue;
 
             _enabledChunks[chunkPos].ToggleChunk(false);
+            _enabledChunks[chunkPos].gameObject.SetActive(false);
             _enabledChunks.Remove(chunkPos);
         }
     }
@@ -163,17 +165,6 @@ public class ChunkManager : MonoBehaviour
                 GameObject worldObject = Instantiate(objectPrefab, chunk.obstacleContainer);
                 worldObject.transform.position = new Vector3(randPos.x, 1, randPos.y);
             }
-
-            //Vector2Int randomPos = chunk.GetChunkPosition();
-
-            //if (randomPos == Vector2Int.one)
-            //    continue;
-            
-            //if (chunk.AddObjectPosition(randomPos))
-            //{
-            //    GameObject worldObject = Instantiate(objectPrefab, chunk.obstacleContainer);
-            //    worldObject.transform.position = new Vector3(randomPos.x, 1, randomPos.y);
-            //}
         }
     }
 
