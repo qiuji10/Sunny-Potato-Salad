@@ -17,7 +17,7 @@ public class Obstacle : MonoBehaviour
         Break = Animator.StringToHash("Break");
 
         if (randomRotation)
-            transform.GetChild(0).rotation = Quaternion.Euler(-90f, 0f, Random.Range(0, 4) * 90f);
+            transform.GetChild(0).rotation = Quaternion.Euler(0f, Random.Range(0, 4) * 90f, 0f);
     }
 
     private void OnTriggerEnter(Collider col)
@@ -26,17 +26,23 @@ public class Obstacle : MonoBehaviour
         {
             StartCoroutine(TemporarilyDeactive(0.45f));
 
-            if (_anim != null)
-                _anim.SetTrigger(Break);
+            BreakObstacle(col.transform);
         }
 
         if (col.CompareTag("Shield"))
         {
             StartCoroutine(TemporarilyDeactive(0.15f));
 
-            if (_anim != null)
-                _anim.SetTrigger(Break);
+            BreakObstacle(col.transform);
         }
+    }
+
+    private void BreakObstacle(Transform collidedObject)
+    {
+        transform.GetChild(0).LookAt(transform.position + collidedObject.forward, Vector3.up);
+
+        if (_anim != null)
+            _anim.SetTrigger(Break);
     }
 
     private IEnumerator TemporarilyDeactive(float duration)

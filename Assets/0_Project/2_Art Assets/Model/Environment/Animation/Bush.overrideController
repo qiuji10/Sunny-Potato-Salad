@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bush
+  m_Controller: {fileID: 9100000, guid: ffbc3ea7b14ed454cb739a4843283976, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 1827226128182048838, guid: 558b87929b1e9464e94f76795b91f629,
+      type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: ca394f440577dc649a1bf5a9c3722151,
+      type: 3}

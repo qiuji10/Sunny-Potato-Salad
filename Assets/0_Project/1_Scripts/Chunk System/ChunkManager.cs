@@ -139,6 +139,7 @@ public class ChunkManager : MonoBehaviour
         SpawnObject("Tree", chunk);
         SpawnObject("Stone1", chunk);
         SpawnObject("Stone2", chunk);
+        SpawnObject("Bush", chunk);
         SpawnObject("TreasureChest", chunk);
     }
 
