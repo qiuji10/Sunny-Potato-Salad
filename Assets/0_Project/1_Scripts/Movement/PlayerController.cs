@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public enum DirectionStates
 {
     forward,
@@ -48,6 +49,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Timer timer;
     [SerializeField] private AudioData playerSfx;
 
+    [Header("UI PowerBuff")]
+    public Image shovelIcon;
+    public Image speedIcon;
+
     private DirectionStates _direction;
     private Vector3 _nextPosition;
     private Vector3 _prevPosition;
@@ -59,7 +64,7 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         moveCoord.parent = null;
-
+        
         shieldChild = new GameObject[shield.transform.childCount];
         for (int i = 0; i < shield.transform.childCount; i++)
         {
@@ -110,24 +115,24 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, moveCoord.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, moveCoord.position) <= 0.0001f)
+        switch (_direction)
         {
-            switch (_direction)
-            {
-                case DirectionStates.forward:
-                    _nextPosition = new Vector3(-2f, 0f, 0f);
-                    break;
-                case DirectionStates.backward:
-                    _nextPosition = new Vector3(2f, 0f, 0f);
-                    break;
-                case DirectionStates.left:
-                    _nextPosition = new Vector3(0f, 0f, -2f);
-                    break;
-                case DirectionStates.right:
-                    _nextPosition = new Vector3(0f, 0f, 2f);
-                    break;
-            }
+            case DirectionStates.forward:
+                _nextPosition = new Vector3(-2f, 0f, 0f);
+                break;
+            case DirectionStates.backward:
+                _nextPosition = new Vector3(2f, 0f, 0f);
+                break;
+            case DirectionStates.left:
+                _nextPosition = new Vector3(0f, 0f, -2f);
+                break;
+            case DirectionStates.right:
+                _nextPosition = new Vector3(0f, 0f, 2f);
+                break;
+        }
 
+        if (Vector3.Distance(transform.position, moveCoord.position) <= 0.001f)
+        {
             _prevPosition = moveCoord.position;
             moveCoord.position += _nextPosition;
 
@@ -278,10 +283,11 @@ public class PlayerController : MonoBehaviour
 
             if (movingCoroutine != null)
                 StopCoroutine(movingCoroutine);
-
+            
             _ReceivedBuffSpeed = true;
             buffSpeed *= 1.05f;
             moveSpeed = buffSpeed;
+            speedIcon.gameObject.SetActive(true);
             movingCoroutine = StartCoroutine(MovementSpeed());
 
             panel.EnqueuePanel(speedBuffSprite, "Captain Speedy", "Never going so fast before!");
@@ -303,6 +309,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Dig Buff");
             diggingLength = 0.15f;
+            shovelIcon.gameObject.SetActive(true);
             StartCoroutine(DiggingSpeed());
             panel.EnqueuePanel(digBuffSprite, "Diggy Diggyy", "Tired of Digging? Then dig more faster!");
         }
@@ -318,6 +325,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DiggingSpeed()
     {
         yield return new WaitForSeconds(30.0f);
+        shovelIcon.gameObject.SetActive(false);
         diggingLength = 1.25f;
     }
 
@@ -326,6 +334,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(12.0f);
         buffSpeed = neutralSpeed;
         _ReceivedBuffSpeed = false;
+        speedIcon.gameObject.SetActive(false);
         movingCoroutine = null;
     }
 
