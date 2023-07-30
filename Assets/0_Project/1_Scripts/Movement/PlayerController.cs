@@ -46,6 +46,10 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer radarRenderer;
     private Transform nearestChest;
 
+    [Header("Misc")]
+    [SerializeField] private Timer timer;
+    [SerializeField] private AudioData playerSfx;
+
     private DirectionStates _direction;
     private Vector3 _nextPosition;
     private Vector3 _prevPosition;
@@ -53,9 +57,6 @@ public class PlayerController : MonoBehaviour
 
     private bool _ReceivedBuffSpeed;
     private Coroutine movingCoroutine, radarCoroutine;
-
-    [Header("Timer")]
-    [SerializeField] private Timer timer;
 
     public void Start()
     {
@@ -224,6 +225,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Digging()
     {
+        AudioManager.instance.PlaySFX(playerSfx, "Digging");
         Ground ground = ChunkManager.GetGround(transform.position);
         animControl.SetBool("dig", true);
         diggingParticle.Play();
@@ -248,6 +250,7 @@ public class PlayerController : MonoBehaviour
 
     public void KnockBack(float stunTime)
     {
+        AudioManager.instance.PlaySFX(playerSfx, "Knockback");
         GameManager.score--;
         animControl.SetTrigger("Stun");
         cantMove = true;
@@ -259,6 +262,9 @@ public class PlayerController : MonoBehaviour
 
     public void TreasureChest_AbilityPoint()
     {
+        AudioManager.instance.PlaySFX(playerSfx, "Ability_1");
+        AudioManager.instance.PlaySFX(playerSfx, "Ability_2");
+
         int rand = Random.Range(0, 10);
 
         if (rand >= 0 && rand < 5)

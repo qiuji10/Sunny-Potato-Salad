@@ -7,6 +7,7 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance;
 
+    public AudioData transitionAudio;
     public List<TransitionSettings> transitions;
     public float startDelay;
 
@@ -26,6 +27,7 @@ public class StageManager : MonoBehaviour
 
     public void LoadScene(string _sceneName)
     {
+        AudioManager.instance.PlayBGM(transitionAudio, "SwitchScene", false);
         TransitionManager.Instance().Transition(_sceneName, GetRandomSettings(), startDelay);
     }
 

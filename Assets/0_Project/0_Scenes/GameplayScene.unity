@@ -7845,6 +7845,12 @@ PrefabInstance:
       objectReference: {fileID: 1729322840}
     - target: {fileID: 3043151069425373271, guid: 7a97712592b056f41be58d8b3463ea4f,
         type: 3}
+      propertyPath: playerSfx
+      value: 
+      objectReference: {fileID: 11400000, guid: 71f593ee3c3d9894c8f430a00e4ab3cd,
+        type: 2}
+    - target: {fileID: 3043151069425373271, guid: 7a97712592b056f41be58d8b3463ea4f,
+        type: 3}
       propertyPath: digBuffSprite
       value: 
       objectReference: {fileID: -1564152188, guid: ce58d7df27722d04183d10f98059be07,

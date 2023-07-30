@@ -1196,6 +1196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b94bb14f994224397fcd7d99e2af14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionAudio: {fileID: 11400000, guid: 0371cc05b99947142bf9150786f3ee50, type: 2}
   transitions:
   - {fileID: 11400000, guid: 057babd6f13132c449650d99e3c4e99c, type: 2}
   - {fileID: 11400000, guid: 5d42ad7319df4a8439d74d82f30a60cc, type: 2}

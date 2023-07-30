@@ -25,4 +25,10 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 6dc348a156c5d094b99e0351906dc2ee, type: 3}
     name: InGame2
     volume: 0.25
+  - clip: {fileID: 8300000, guid: f1799dc73cc4729418273446f753c41b, type: 3}
+    name: SwitchScene
+    volume: 0.55
+  - clip: {fileID: 8300000, guid: ee20821d82dda4545bce0a97519881e6, type: 3}
+    name: Intro
+    volume: 0.55
   soundPacks: []
