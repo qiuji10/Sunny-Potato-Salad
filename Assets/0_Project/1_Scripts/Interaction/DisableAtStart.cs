@@ -6,7 +6,7 @@ public class DisableAtStart : MonoBehaviour
 {
     private void Start()
     {
-        Invoke("DisableObject", 1f);   
+        Invoke("DisableObject", 0.5f);   
     }
 
     private void DisableObject()
