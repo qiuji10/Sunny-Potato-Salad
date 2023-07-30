@@ -29,7 +29,6 @@ public class Panel : MonoBehaviour
         group.alpha = 0f;
     }
 
-    [Button]
     public void EnqueuePanel(Sprite sprite, string title, string description)
     {
         PanelData panelData = new PanelData()
