@@ -262,32 +262,32 @@ PrefabInstance:
     - target: {fileID: 7703733316426776720, guid: 70351c0b6f439534088a87f691855fc2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.385095
       objectReference: {fileID: 0}
     - target: {fileID: 7703733316426776720, guid: 70351c0b6f439534088a87f691855fc2,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.385095
       objectReference: {fileID: 0}
     - target: {fileID: 7703733316426776720, guid: 70351c0b6f439534088a87f691855fc2,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4
+      value: 0.308076
       objectReference: {fileID: 0}
     - target: {fileID: 7703733316426776720, guid: 70351c0b6f439534088a87f691855fc2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.003
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7703733316426776720, guid: 70351c0b6f439534088a87f691855fc2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: -0.9407
       objectReference: {fileID: 0}
     - target: {fileID: 7703733316426776720, guid: 70351c0b6f439534088a87f691855fc2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.003
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7703733316426776720, guid: 70351c0b6f439534088a87f691855fc2,
         type: 3}
@@ -436,13 +436,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 443.58176, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -510,7 +510,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344724830}
   m_LocalRotation: {x: 0.06911682, y: -0.9086858, z: 0.16686305, w: -0.37639043}
-  m_LocalPosition: {x: 0, y: -0.99506474, z: 14.050001}
+  m_LocalPosition: {x: 0, y: -0.99506474, z: 11.38}
   m_LocalScale: {x: 5.239998, y: 1.0480002, z: 5.2399974}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -842,8 +842,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
-  m_Antialiasing: 1
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -895,7 +895,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 60.000004
   orthographic: 1
   orthographic size: 5
@@ -1440,7 +1440,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -1455,10 +1455,10 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1939,8 +1939,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957078861}
   m_LocalRotation: {x: -0.022677775, y: 0.952566, z: -0.04356363, w: -0.300343}
-  m_LocalPosition: {x: 0.0000001364992, y: 2.9999995, z: -0.0000002047488}
-  m_LocalScale: {x: 1, y: 4.5, z: 1}
+  m_LocalPosition: {x: 0.02, y: 2.6, z: 0.02}
+  m_LocalScale: {x: 0.81439, y: 3.664755, z: 0.81439}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 344724831}
@@ -3020,11 +3020,11 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0
-  far clip plane: 1000
+  far clip plane: 12.01
   field of view: 60.000004
   orthographic: 1
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
