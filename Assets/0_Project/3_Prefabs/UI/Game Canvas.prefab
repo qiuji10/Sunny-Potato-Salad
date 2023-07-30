@@ -606,6 +606,7 @@ GameObject:
   - component: {fileID: 526836129343902202}
   - component: {fileID: 1821095373272660156}
   - component: {fileID: 1199670254855760658}
+  - component: {fileID: 2211913466346338602}
   m_Layer: 5
   m_Name: Score Text
   m_TagString: Untagged
@@ -732,6 +733,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &2211913466346338602
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3631704505815056220}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3768736641365098450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,6 +1122,7 @@ GameObject:
   - component: {fileID: 7375362198532721750}
   - component: {fileID: 956429820967672615}
   - component: {fileID: 7048214435555768447}
+  - component: {fileID: 7777711711471331478}
   m_Layer: 5
   m_Name: Highscore Text
   m_TagString: Untagged
@@ -1235,6 +1249,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &7777711711471331478
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666613181403917489}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7100899094565883404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1459,7 @@ GameObject:
   - component: {fileID: 1045131826570634682}
   - component: {fileID: 40758624183576692}
   - component: {fileID: 3825741937491556456}
+  - component: {fileID: 7189697865703941606}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1555,3 +1582,15 @@ MonoBehaviour:
           m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!225 &7189697865703941606
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9080241536640077383}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
