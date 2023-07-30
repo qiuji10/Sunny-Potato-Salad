@@ -3015,11 +3015,6 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 1729322840}
-    - target: {fileID: 3043151069425373271, guid: 7a97712592b056f41be58d8b3463ea4f,
-        type: 3}
-      propertyPath: diggingParticle
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3642006765958601993, guid: 7a97712592b056f41be58d8b3463ea4f,
         type: 3}
       propertyPath: m_RootOrder
