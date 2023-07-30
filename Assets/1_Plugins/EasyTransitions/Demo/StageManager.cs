@@ -20,6 +20,8 @@ public class StageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void LoadScene(string _sceneName)
